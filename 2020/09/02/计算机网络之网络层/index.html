@@ -146,14 +146,14 @@
     })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="一只柑の博客" type="application/atom+xml">
 </head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://cdn.rice-and-bran.site/network.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">一只柑の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计算机网络2之网络层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-02T11:56:08.000Z" title="发表于 2020-09-02 19:56:08">2020-09-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-23T02:34:45.084Z" title="更新于 2021-05-23 10:34:45">2021-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>TCP/IP四层模型（应用层、传输层、网络层、网络接口层）之网络层</p>
 <p>前面讲到数据链路层只能解决相邻物理节点传输的问题，而网络层能解决跨节点传输的问题。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200902200857189.png" alt="image-20200902200857189"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200902200857189.png" alt="image-20200902200857189"></p>
 <h2 id="IP协议详解"><a href="#IP协议详解" class="headerlink" title="IP协议详解"></a>IP协议详解</h2><h3 id="虚拟互连网络"><a href="#虚拟互连网络" class="headerlink" title="虚拟互连网络"></a>虚拟互连网络</h3><p>实际的计算机网络是错综复杂的，物理设备通过使用IP协议，屏蔽了物理网络之间的差异，当网络中的主机使用IP协议连接时，则无需关注网络细节。这就是<strong>虚拟互连网络</strong>的概念</p>
 <ul>
 <li><p>IP协议使得复杂的实际网络变为一个虚拟互连的网络</p>
 </li>
 <li><p>IP协议使得网络层可以屏蔽底层细节而专注网络层的数据转发</p>
 </li>
-<li><p>IP协议<font color='red'>解决了在虚拟网络中数据传输路径的问题</font></p>
+<li><p>IP协议<font color="red">解决了在虚拟网络中数据传输路径的问题</font></p>
 </li>
 </ul>
 <h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>MAC地址是不可改变的，IP地址根据网络环境发生变化。</p>
@@ -165,7 +165,7 @@
 <p>前面提到，数据传输对于物理层来说传输的是01…这样的比特流，对于数据链路层，传输的是<strong>数据帧</strong>，而其中出去帧首尾部以外，帧数据里面就是<strong>IP数据报</strong>的内容了</p>
 <p><strong>IP数据报</strong>分为IP首部和IP数据报的数据</p>
 <p>下表就是IP协议中IP首部的具体内容，每一行都是32位（4个字节），前五行就是IP协议头部的内容，所以对于IP头部至少有20个字节大小：</p>
-<img src="计算机网络之网络层/image-20200906142941406.png" alt="image-20200906142941406" style="zoom: 50%;" />
+<img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200906142941406.png" alt="image-20200906142941406" style="zoom: 50%;">
 
 <p><strong>版本</strong>：占4位，指的是IP协议的版本，通信双方的版本必须一致，有IPv4、IPv6。</p>
 <p><strong>首部长度</strong>：占4位，最大数值为15，表示的是IP首部长度，单位是“32位字“（4个字节），也即是IP首部最大长度我60字节。</p>
@@ -211,9 +211,9 @@
 <li>路由器往该网络接口发送数据帧</li>
 </ol>
 <p>而在通过<strong>路由表</strong>，我们可以在逐跳过程中找到目的IP地址对应的下一跳的IP地址</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200906220623339.png" alt="image-20200906220623339"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200906220623339.png" alt="image-20200906220623339"></p>
 <p>计算机或者路由器都拥有路由表</p>
-<h3 id="IP协议的转发流程-1"><a href="#IP协议的转发流程-1" class="headerlink" title="IP协议的转发流程"></a>IP协议的转发流程</h3><img src="计算机网络之网络层/image-20200906220946384.png" alt="image-20200906220946384" style="zoom:50%;" />
+<h3 id="IP协议的转发流程-1"><a href="#IP协议的转发流程-1" class="headerlink" title="IP协议的转发流程"></a>IP协议的转发流程</h3><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200906220946384.png" alt="image-20200906220946384" style="zoom:50%;">
 
 <ul>
 <li>A发出目的地为C的IP数据报，查询路由器表发现下一跳为E</li>
@@ -224,32 +224,32 @@
 <p><strong>将网络层与数据链路层结合起来看，该过程为：</strong></p>
 <p><strong>A-路由E</strong>：</p>
 <ul>
-<li>A发出目的地为C的IP数据报，<font color='red'>查询路由表发现下一跳为E</font></li>
-<li>A将IP数据报<font color='red'>交给数据链路层，并告知目的MAC地址是E</font></li>
-<li>数据链路层<font color='red'>填充源MAC地址</font>和<font color='red'>目的MAC地址E</font></li>
+<li>A发出目的地为C的IP数据报，<font color="red">查询路由表发现下一跳为E</font></li>
+<li>A将IP数据报<font color="red">交给数据链路层，并告知目的MAC地址是E</font></li>
+<li>数据链路层<font color="red">填充源MAC地址</font>和<font color="red">目的MAC地址E</font></li>
 <li>数据链路层通过物理层将数据发送给E</li>
 </ul>
 <p><strong>路由E-路由F</strong>：</p>
 <ul>
-<li>E的数据链路层收到数据帧，<font color='red'>把数据交给网络层</font></li>
-<li>E<font color='red'>查询路由表，发现下一跳为F</font></li>
-<li>E<font color='red'>把数据交给数据链路层，并告知目的MAC地址为F</font></li>
-<li>E的数据链路层<font color='red'>封装数据帧并发送</font></li>
+<li>E的数据链路层收到数据帧，<font color="red">把数据交给网络层</font></li>
+<li>E<font color="red">查询路由表，发现下一跳为F</font></li>
+<li>E<font color="red">把数据交给数据链路层，并告知目的MAC地址为F</font></li>
+<li>E的数据链路层<font color="red">封装数据帧并发送</font></li>
 </ul>
 <p><strong>路由F-C</strong>：</p>
 <ul>
-<li>F的数据链路层接收到数据帧，<font color='red'>把帧数据交给网络层</font></li>
-<li>F<font color='red'>查询路由表，发现下一跳为C</font></li>
-<li>F<font color='red'>把数据交给数据链路层，并告知目的MAC地址为C</font></li>
-<li>F的数据链路层<font color='red'>封装数据帧并发送</font></li>
+<li>F的数据链路层接收到数据帧，<font color="red">把帧数据交给网络层</font></li>
+<li>F<font color="red">查询路由表，发现下一跳为C</font></li>
+<li>F<font color="red">把数据交给数据链路层，并告知目的MAC地址为C</font></li>
+<li>F的数据链路层<font color="red">封装数据帧并发送</font></li>
 </ul>
 <p>值得注意的是：</p>
 <p><strong>数据帧的每一跳MAC地址都在变化</strong>，因为发送端开始不知道目的主机的MAC地址，所以没经过一个路由MAC地址是在变化的。</p>
 <p><strong>IP数据报每一跳的IP地址始终不变</strong>。路由器只是在接收到数据报时候，检查数据报的目的IP地址，然后查找路由表，选择合适的接口发送出去。</p>
 <h2 id="IP地址的子网划分"><a href="#IP地址的子网划分" class="headerlink" title="IP地址的子网划分"></a>IP地址的子网划分</h2><h3 id="分类的IP地址"><a href="#分类的IP地址" class="headerlink" title="分类的IP地址"></a>分类的IP地址</h3><p>如果对42亿多个ip地址进行分类的话十分复杂，则需要先把ip地址进一步划分为两个部分，网络号和主机号，加起来为32位。</p>
 <p>A类地址：网络号8位，主机号24位；B类地址：网络号16位，主机号16位；C类地址：网络号24位，主机号8位。</p>
-<p>注意：<font color='red'>根据网络号的前几位判断，比如A类是0开头，B类是10开头</font></p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200913131127092.png" alt="image-20200913131127092"></p>
+<p>注意：<font color="red">根据网络号的前几位判断，比如A类是0开头，B类是10开头</font></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20200913131127092.png" alt="image-20200913131127092"></p>
 <table>
 <thead>
 <tr>
@@ -307,7 +307,7 @@
 <li>C类地址网络段(192.0.0)是不可使用的</li>
 </ul>
 <p>出去这些特殊网络号和主机号之后</p>
-<img src="计算机网络之网络层/QQ拼音截图20201010203015.png" alt="QQ拼音截图20201010203015" style="zoom:60%;" />
+<img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ拼音截图20201010203015.png" alt="QQ拼音截图20201010203015" style="zoom:60%;">
 
 <blockquote>
 <p>127.0.0.1，通常被称为本地回环地址(Loopback Address)，不属于任何一个有类别地址类。它代表设备的本地虚拟接口，所以默认被看作是永远不会宕掉的接口。在Windows操作系统中也有相似的定义，所以通常在安装网卡前就可以ping通这个本地回环地址。一般都会用来检查本地网络协议、基本数据接口等是否正常的。</p>
@@ -330,7 +330,7 @@
 </ul>
 <p>所以A类地址的子网掩码是255.0.0.0；B类地址的是255.255.0.0；C类地址的是255.255.255.0</p>
 <p>通过ip与其子网掩码可以快速得到该ip地址的网络号</p>
-<img src="计算机网络之网络层/QQ拼音截图20201010211843.png" alt="QQ拼音截图20201010211843" style="zoom:60%;" />
+<img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ拼音截图20201010211843.png" alt="QQ拼音截图20201010211843" style="zoom:60%;">
 
 <p>例如一个ip地址为193.10.10.6，其子网掩码为255.255.255.128，将他们转换为二进制，做<strong>AND运算</strong>，得到二进制的网络号，其网络号为193.10.10.0</p>
 <p>假设一个ip为193.10.10.129，子网掩码为255.255.255.128，其网络号为？</p>
@@ -358,21 +358,21 @@
 <p>当内网多个设备使用同一个外网IP请求外网的服务，外部怎么知道具体是哪个设备在请求的？</p>
 <p>此时需要使用网络地址转换NAT(Network Address Translation)，NAT技术用于多个主机通过一个公有IP访问互联网的私有网络中；</p>
 <p>NAT技术减缓了IP地址的损耗，但是增加了网络通信的复杂度</p>
-<img src="计算机网络之网络层/QQ拼音截图20201016145019.png" alt="QQ拼音截图20201016145019" style="zoom:60%;" />
+<img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ拼音截图20201016145019.png" alt="QQ拼音截图20201016145019" style="zoom:60%;">
 
 <p>举例：当内网设备192.168.2.11进程与外网某目的计算机进行通信时使用到了NAT技术（路由器的外网IP地址为173.21.59.10）：</p>
 <p>192.168.2.11:6666进程通过NAT技术转化为新的地址和端口号然后发送到网络中去。接收数据也是这一过程。</p>
 <p>这个映射表就成为NA(P)T表</p>
 <h2 id="ICMP协议详解"><a href="#ICMP协议详解" class="headerlink" title="ICMP协议详解"></a>ICMP协议详解</h2><p>网际控制报文协议（Internet Control Message Protocal）</p>
 <p>ICMP协议可以报告错误信息或者异常情况</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016150645.png" alt="QQ拼音截图20201016150645"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016150645.png" alt="QQ拼音截图20201016150645"></p>
 <p>ICMP报文数据包含8位类型8位代码和16位校验和</p>
 <p>如果ip协议传输的是ICMP数据的话，将会在IP首部中的8位协议写入1</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016151046.png" alt="QQ拼音截图20201016151046"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016151046.png" alt="QQ拼音截图20201016151046"></p>
 <p>报文种类：差错报告报文和询问报文</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016151307.png" alt="QQ拼音截图20201016151307"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016151307.png" alt="QQ拼音截图20201016151307"></p>
 <p>举例：如果一个计算机和另一个已关机的计算机通信，此时就会返回ICMP代码为1，类型为3的报文</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016151718.png" alt="QQ拼音截图20201016151718"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/QQ%E6%8B%BC%E9%9F%B3%E6%88%AA%E5%9B%BE20201016151718.png" alt="QQ拼音截图20201016151718"></p>
 <h2 id="ICMP协议的应用"><a href="#ICMP协议的应用" class="headerlink" title="ICMP协议的应用"></a>ICMP协议的应用</h2><h3 id="Ping应用"><a href="#Ping应用" class="headerlink" title="Ping应用"></a>Ping应用</h3><p>ping这个命令返回的就是一种询问报文，报文类型为回送请求或应答</p>
 <p>网络故障排查：</p>
 <p>ping127.0.01可以检查本地协议或数据接口是否正常；ping网关地址（路由器地址192.168.1.1）检查与路由器的连接是否正常；ping远端地址 不通说明运营商问题</p>
@@ -380,12 +380,12 @@
 <p>可通过命令行查询 例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tracert rice-and-bran.site</span><br></pre></td></tr></table></figure>
 
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20201016163314268.png" alt="image-20201016163314268"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20201016163314268.png" alt="image-20201016163314268"></p>
 <h2 id="网络层的路由概述"><a href="#网络层的路由概述" class="headerlink" title="网络层的路由概述"></a>网络层的路由概述</h2><p>进行网络通信时候，通过路由表来查找下一跳地址，那么：</p>
 <p>下一跳地址是怎么来的？下一跳地址是唯一的吗？下一跳地址是最佳的吗？</p>
 <p>路由器是怎么协同工作的？</p>
 <p>为了解决这些问题，需要一个好的路由算法。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/clip_image001.png" alt="img"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/clip_image001.png" alt="img"></p>
 <ul>
 <li><p>每一顶点表示一个网络、路由器或者计算机</p>
 </li>
@@ -413,7 +413,7 @@
 <li>D<sub>i</sub>描述的是当前节点到别的节点的距离</li>
 <li>S<sub>i</sub>描述的是当前节点到别的节点的下一节点</li>
 <li>每一个节点与相邻的节点交换D<sub>i</sub>和S<sub>i</sub>的信息</li>
-<li><font color='red'>每一个节点根据交换的信息更新自己的节点信息</font></li>
+<li><font color="red">每一个节点根据交换的信息更新自己的节点信息</font></li>
 </ul>
 <h3 id="RIP协议的过程"><a href="#RIP协议的过程" class="headerlink" title="RIP协议的过程"></a>RIP协议的过程</h3><ul>
 <li>RIP(Routing Information Protocol)协议，是使用DV算法的一种路由协议</li>
@@ -433,14 +433,14 @@
 </ol>
 <h3 id="RIP协议缺点"><a href="#RIP协议缺点" class="headerlink" title="RIP协议缺点"></a>RIP协议缺点</h3><p>故障信息传递慢：</p>
 <p>过度依赖相邻路由信息，“视野不够广”，如果A宕机，B、C之间会反复查找，直到达到16跳。</p>
-<img src="计算机网络之网络层/image-20201115104650763.png" alt="image-20201115104650763" style="zoom: 67%;" />
+<img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20201115104650763.png" alt="image-20201115104650763" style="zoom: 67%;">
 
 <p>RIP协议优点是实现简单，开销很小，但是限制了网络的规模，“坏消息传的慢”，更新收敛时间过长</p>
 <h2 id="Dijkstra-迪杰斯特拉-算法"><a href="#Dijkstra-迪杰斯特拉-算法" class="headerlink" title="Dijkstra(迪杰斯特拉)算法"></a>Dijkstra(迪杰斯特拉)算法</h2><p>Dijkstra(迪杰斯特拉)算法是准名的图算法，解决有权图从一个节点到其他节点的最短路径问题。</p>
 <p>特点是“以起点为中心，向外层层扩展”</p>
 <p>例如：</p>
 <p>我们要从A到E，每两个节点之间距离已知，则可以有以下五条路径</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20201129184837923.png" alt="image-20201129184837923"></p>
+<p><img src="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/image-20201129184837923.png" alt="image-20201129184837923"></p>
 <p>算法实现过程：</p>
 <p><em>1. 初始化两个集合(S,U)(S为只有初始顶点点A的集合，U为其他顶点集合)</em></p>
 <p><em>2. 如果U不为空，对U集合顶点进行距离的排序，并取出距离A最近的一个顶点D</em></p>

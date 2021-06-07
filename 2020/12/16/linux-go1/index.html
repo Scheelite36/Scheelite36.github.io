@@ -180,7 +180,7 @@
 <p><code>ctrl+w</code>删除光标左侧的一个“单词”（空格隔开的一部分）</p>
 <p><code>ctrl+y</code>用于粘贴上面u/k/w删除的字符串</p>
 <h2 id="Linux下的文件操作"><a href="#Linux下的文件操作" class="headerlink" title="Linux下的文件操作"></a>Linux下的文件操作</h2><h3 id="Linux下文件目录组织形式"><a href="#Linux下文件目录组织形式" class="headerlink" title="Linux下文件目录组织形式"></a>Linux下文件目录组织形式</h3><ul>
-<li>在Linux中<font color='red'>一切都是文件</font>，不像windows分为文件和非文件，甚至连目录也是文件</li>
+<li>在Linux中<font color="red">一切都是文件</font>，不像windows分为文件和非文件，甚至连目录也是文件</li>
 <li>Linux中只有一个根目录就是<code>/</code>，最顶级的目录，不同于windows很多个盘：<code>C:\</code>等</li>
 <li>windows中用反斜杠表明目录层级和包含关系，而Linux中用<code>/</code>来表示，例如：<code>/usr/bin</code></li>
 <li>一般在Linux命令目录时尽量不使用空格或其他特殊符号，尽量用小写字母</li>
@@ -191,7 +191,7 @@
 <p><code>which</code>命令获取命令的可执行文件的位置，参数为命令，如<code>which pwd</code>获取pwd命令可执行文件的位置。</p>
 <h3 id="ls、cd、du命令"><a href="#ls、cd、du命令" class="headerlink" title="ls、cd、du命令"></a>ls、cd、du命令</h3><p>不带参数列出非隐藏文件，-a参数列出所有文件，-A列出不带<code>.</code>和<code>..</code>的目录，</p>
 <p>-l参数列出文件详细信息, <code>total xx</code> 表示当前目录的总字节数（k）</p>
-<p><img src="linux-go1/image-20201231122820898.png" alt="image-20201231122820898"></p>
+<p><img src="/2020/12/16/linux-go1/image-20201231122820898.png" alt="image-20201231122820898"></p>
 <p>里面每一行的内容分别代表：文件权限、链接数目、文件所有者、文件所在的群组、文件大小（仅指目录文件的大小）、文件修改时间、名称</p>
 <p>可以很多参数合并一起使用如<code>ls -ltah</code>显示所有文件详情</p>
 <h4 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h4><p>change directory 切换路径</p>
@@ -223,11 +223,11 @@
 <p><code>ln file1 file2</code>这个命令创建了一个file1的硬链接file2。</p>
 <p><em>此时如果通过<code>ls -i</code>来查看文件相关的inode信息，会发现二者指向了同一个inode</em></p>
 <p>对于硬链接来说，删除任意一方文件，共同指向的文件内容并不会从硬盘上被删除，只有同时删除，该inode才会被删除。</p>
-<p><img src="linux-go1/image-20210102142105447.png" alt="image-20210102142105447"></p>
+<p><img src="/2020/12/16/linux-go1/image-20210102142105447.png" alt="image-20210102142105447"></p>
 <p>第一列是inode信息，第三列中数字为2，对于文件来说指的是有相同inode号的文件数。（对于目录，指的是目录下的文件数）</p>
 <p><strong>软链接</strong>类似与windows下的快捷方式。创建软链接需要带上<code>-s</code>参数</p>
 <p><em>图示创建了file3软链接，链接到file1</em></p>
-<p><img src="linux-go1/image-20210102142711614.png" alt="image-20210102142711614"></p>
+<p><img src="/2020/12/16/linux-go1/image-20210102142711614.png" alt="image-20210102142711614"></p>
 <p>如果删掉了file1，file2就会失效。</p>
 <h2 id="Linux下的权限管理"><a href="#Linux下的权限管理" class="headerlink" title="Linux下的权限管理"></a>Linux下的权限管理</h2><p>在Ubuntu系统中可以用sudo(Substitute User DO)命令暂时成为root超级用户。</p>
 <p><code>sudo su</code>切换超级用户，输入exit推出也可以<code>sudo</code>后面直接接待执行命令</p>
@@ -243,10 +243,10 @@
 <p><code>chown</code>的<code>-R</code>参数递归设置子目录和子文件，配合上面的方法使用</p>
 <h4 id="修改访问权限"><a href="#修改访问权限" class="headerlink" title="修改访问权限"></a>修改访问权限</h4><p><strong>权限的原理</strong>：Linux系统中，每个文件和目录都有一系列权限属性，在<code>ls -l</code>运行的第一列信息就是访问权限符。</p>
 <p>第一个字符中：<code>-</code>表示普通文件；<code>d</code>表示目录；<code>l</code>表示软链接文件</p>
-<img src="linux-go1/image-20210102152128235.png" alt="image-20210102152128235" style="zoom:50%;" />
+<img src="/2020/12/16/linux-go1/image-20210102152128235.png" alt="image-20210102152128235" style="zoom:50%;">
 
 <p>后面的字符中，<code>r</code>可读，<code>w</code>可写，<code>x</code>可执行/可读（对于目录），如果相应位置有字母，表示有相应的权限，短横<code>-</code>表示没有相应权限</p>
-<p><img src="linux-go1/image-20210102152505598.png" alt="image-20210102152505598"></p>
+<p><img src="/2020/12/16/linux-go1/image-20210102152505598.png" alt="image-20210102152505598"></p>
 <p>例如file1这个文件<code>-</code>表示普通文件，<code>rw-</code>在sheelite用户下，可读可写，非可执行文件，第二个<code>rw-</code>scheelite群组其他用户也可读可写，不可执行，<code>r--</code>其他用户只能读该文件</p>
 <h4 id="chmod命令改变文件的访问权限"><a href="#chmod命令改变文件的访问权限" class="headerlink" title="chmod命令改变文件的访问权限"></a>chmod命令改变文件的访问权限</h4><p>Linux系统对每种权限（r、w和x）分配了对应的数字</p>
 <table>
@@ -270,7 +270,7 @@
 </tr>
 </tbody></table>
 <p>要合并这些权限，就需要简单的数字相加；比如6表示有读和写的权限</p>
-<img src="linux-go1/113366367897643514.jpg" alt="113366367897643514" style="zoom:33%;" />
+<img src="/2020/12/16/linux-go1/113366367897643514.jpg" alt="113366367897643514" style="zoom:33%;">
 
 <p>用三组数字来表示这些权限，例如640：</p>
 <ul>
@@ -279,7 +279,7 @@
 <li>0 除此之外其他用户没有任何权限</li>
 </ul>
 <p><code>chmod 640 file1</code>修改文件权限：</p>
-<p><img src="linux-go1/image-20210102153745678.png" alt="image-20210102153745678"></p>
+<p><img src="/2020/12/16/linux-go1/image-20210102153745678.png" alt="image-20210102153745678"></p>
 <p><strong>用字母划分权限</strong></p>
 <p><code>chmod u+rx file1</code>对文件的所有者增加读和运行的权限</p>
 <p><code>chmod g+r o-r file</code>文件file的群组其他用户增加读的权限，其他用户移除读的权限</p>

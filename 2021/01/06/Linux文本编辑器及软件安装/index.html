@@ -179,11 +179,11 @@
 <p>配置.bashrc文件可以修改终端的各种配置，如命令提示符样式，创建命令别名</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 创建别名 alias xx=&#x27;command&#x27;</span><br><span class="line">alias ll=&#x27;ls -alF&#x27;</span><br><span class="line">alias la=&#x27;ls -A&#x27;</span><br><span class="line">alias l=&#x27;ls -CF&#x27;</span><br></pre></td></tr></table></figure>
 
-<p>全局配置的路径：<code>/etc/bash.bashrc</code>，但是家目录下的<font color='red'>优先级</font>高于系统的bash.bashrc文件</p>
+<p>全局配置的路径：<code>/etc/bash.bashrc</code>，但是家目录下的<font color="red">优先级</font>高于系统的bash.bashrc文件</p>
 <p><strong>profile配置文件</strong></p>
 <p>单个用户：<code>~/.profile</code>，全局<code>/etc/profile</code></p>
 <p>bashrc应用于图形化终端，profile应用于TTY1-TTY6这种需要用户登录的终端。profile文件会调用.bashrc</p>
-<img src="Linux文本编辑器及软件安装/151709029500416466.jpg" alt="151709029500416466" style="zoom:33%;" /> 
+<img src="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/151709029500416466.jpg" alt="151709029500416466" style="zoom:33%;"> 
 
 <p>bashrc 和 profile二者修改后都是下次登陆生效，需要立即生效使用source命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source .bashrc</span><br><span class="line">source .profile</span><br></pre></td></tr></table></figure>
@@ -212,7 +212,7 @@
 <p><strong>SYNOPSIS</strong></p>
 <p>概要，使用此命令的方法</p>
 <p><code>ls [OPTION]... [FILE]...</code></p>
-<img src="Linux文本编辑器及软件安装/image-20210110233353458.png" alt="image-20210110233353458" style="zoom:50%;" />
+<img src="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/image-20210110233353458.png" alt="image-20210110233353458" style="zoom:50%;">
 
 <p>粗体：原封不动输入</p>
 <p>下划线：用实际内容替代</p>
@@ -224,17 +224,17 @@
 <p>其他区域：<strong>AUTHOR</strong>, <strong>REPROTIONG BUGS</strong>, <strong>COPYRIGHT</strong>, <strong>SEE ALSO</strong></p>
 <h3 id="apropos查找命令"><a href="#apropos查找命令" class="headerlink" title="apropos查找命令"></a>apropos查找命令</h3><p>apropos命令后面添加关键字即可（根据手册中的关键字）</p>
 <p>例如需要查找控制音量的方法 <code>apropos sound</code></p>
-<img src="Linux文本编辑器及软件安装/image-20210111005834669.png" alt="image-20210111005834669" style="zoom:67%;" />
+<img src="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/image-20210111005834669.png" alt="image-20210111005834669" style="zoom:67%;">
 
 <h3 id="其他查阅手册的方法"><a href="#其他查阅手册的方法" class="headerlink" title="其他查阅手册的方法"></a>其他查阅手册的方法</h3><p><strong>很多命令都支持<code>-h</code>参数</strong></p>
 <p>比man命令的内容稍显简便</p>
 <p><strong>whatis命令</strong></p>
 <p>man的精简版，显示man的NAME区域</p>
-<h3 id="文件查找命令"><a href="#文件查找命令" class="headerlink" title="文件查找命令"></a>文件查找命令</h3><h4 id="locate命令"><a href="#locate命令" class="headerlink" title="locate命令"></a>locate命令</h4><p><font color='red'>查找速度极快，查找包含关键字的文件。</font></p>
+<h3 id="文件查找命令"><a href="#文件查找命令" class="headerlink" title="文件查找命令"></a>文件查找命令</h3><h4 id="locate命令"><a href="#locate命令" class="headerlink" title="locate命令"></a>locate命令</h4><p><font color="red">查找速度极快，查找包含关键字的文件。</font></p>
 <p><code>locate xxx</code>会查找并列出xxx（目录或文件名包含xxx）所在的所有目录</p>
 <p>缺陷：如果是刚新建的文件locate是查不到的，因为locate不是查找硬盘，是在数据库（包含文件的列表和文件的位置）中查找记录。对于刚创建的文件，没有更新进数据库（一般24小时自动更新）</p>
 <p>当然也可以用updatedb命令强制系统立即更新数据库 <code>sudo updatedb</code></p>
-<h4 id="find命令深入查找"><a href="#find命令深入查找" class="headerlink" title="find命令深入查找"></a>find命令深入查找</h4><font color='red'>
+<h4 id="find命令深入查找"><a href="#find命令深入查找" class="headerlink" title="find命令深入查找"></a>find命令深入查找</h4><font color="red">
 遍历实际的硬盘的文件，还可以对查找的文件进行操作。
 查找文件要完全对应关键字，但是可以用正则匹配
 功能强大

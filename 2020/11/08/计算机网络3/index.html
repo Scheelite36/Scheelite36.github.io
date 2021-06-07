@@ -166,11 +166,11 @@
 </tr>
 </tbody></table>
 <p>各层之间的相关协议：</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image002.jpg" alt="img"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image002.jpg" alt="img"></p>
 <h2 id="UDP协议详解"><a href="#UDP协议详解" class="headerlink" title="UDP协议详解"></a>UDP协议详解</h2><p>UDP（User Datagram Protocol: 用户数据报协议）</p>
 <p>传输数据报时不拆分不合并</p>
 <p>UDP在IP数据报内部</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image004.jpg" alt="img"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image004.jpg" alt="img"></p>
 <p>UDP协议首部分为16位源端口号、16位目的端口号、16位UDP长度、16位UDP校验和。剩下为UDP数据</p>
 <ul>
 <li><p>UDP是无连接协议，即发送数据前不需要建立连接</p>
@@ -186,7 +186,7 @@
 </ul>
 <h2 id="TCP协议详解"><a href="#TCP协议详解" class="headerlink" title="TCP协议详解"></a>TCP协议详解</h2><p>TCP（Transmission Control Protocol: 传输控制协议）</p>
 <p>TCP同样也在IP数据报内部</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image006.jpg" alt="img"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image006.jpg" alt="img"></p>
 <p><strong>特点：</strong></p>
 <ul>
 <li><p>TCP是面向连接的协议，即需要通信前建立连接</p>
@@ -201,39 +201,39 @@
 </li>
 </ul>
 <p><strong>TCP协议的首部</strong>：</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image008.jpg" alt="img"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/clip_image008.jpg" alt="img"></p>
 <p>（表格宽度代表位数）</p>
 <p>固定有20个字节长度，即表格中的前五行</p>
 <p><strong>序号</strong>范围0~2<sup>32</sup>-1，一个字节一个序号，代表了数据首字节字号</p>
 <p><strong>确认号</strong>范围0~2<sup>32</sup>-1，一个字节一个序号，代表期望收到数据的首字节序号。一般来说确认号为N：则表示N-1序号的数据都已经收到</p>
 <p><strong>数据偏移</strong>占4位：0~15，单位为32位字，即每一个偏移都可以表示4个字节的偏移，表示数据偏离首部的距离（因为TCP选项未知，需要存储数据偏移来找到真实数据位置）。15*4=60字节，最大数据便宜是60个字节，所以TCP首部是20~60字节范围</p>
 <p><strong>TCP标记</strong>占6位，每位各有不同意义，分别是URG\ACK\PSH\PST\SYN\FIN</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/tcp.png" alt="tcp"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/tcp.png" alt="tcp"></p>
 <p><strong>窗口</strong>：占16位：0<del>2<sup>16</sup>-1，窗口指明对方发送的数据量。比如确认号是501，窗口是1000，表明501</del>1500这么多个字节的数据都是可以接收的。</p>
 <p><strong>紧急指针</strong>：紧急数据（当URG=1启用)，指定紧急数据在报文的位置</p>
 <p><strong>TCP选项</strong>：最多40个字节，用于支持TCP未来的拓展</p>
 <h2 id="可靠传输的基本原理"><a href="#可靠传输的基本原理" class="headerlink" title="可靠传输的基本原理"></a>可靠传输的基本原理</h2><h3 id="停止等待协议（超时定时器）"><a href="#停止等待协议（超时定时器）" class="headerlink" title="停止等待协议（超时定时器）"></a>停止等待协议（超时定时器）</h3><p>为了简化讨论协议，简化为接收方和发送方。</p>
 <p>无差错情况下，接收方发送消息，接收方收到后发送确认。在收到对方消息前都是停止等待状态。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209011832049.png" alt="image-20201209011832049"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209011832049.png" alt="image-20201209011832049"></p>
 <p>出差错的情况下，发送方发送消息后，出现差错，接收方没有接收到，无法发送确认消息，等待一段时间后发送方重传消息。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209012107845.png" alt="image-20201209012107845"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209012107845.png" alt="image-20201209012107845"></p>
 <p>确认消息丢失，同样发生超时重传</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209012132010.png" alt="image-20201209012132010"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209012132010.png" alt="image-20201209012132010"></p>
 <p>确认的消息很久才到，超时重传</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209012315181.png" alt="image-20201209012315181"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209012315181.png" alt="image-20201209012315181"></p>
 <p><strong>超时定时器</strong>：每发送一个消息，都需要设置一个定时器</p>
-<p>小结：停止等待协议是最简单的可靠传输协议；停止等待协议对<font color='red'>信道的利用效率</font>不高</p>
+<p>小结：停止等待协议是最简单的可靠传输协议；停止等待协议对<font color="red">信道的利用效率</font>不高</p>
 <h3 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h3><p>ARQ(Automatic Repeat reQuest: 自动重传请求) 。用于批量发送消息和确认</p>
-<p><font color='red'><strong>滑动窗口</strong></font>：窗口里的数据都可以发送，只要窗口内的数据发送的确认号到达了，就往前继续滑动。不需要对里面的每个数据进行确认，而采用<font color='red'><strong>累计确认</strong></font>的方法。即只要收到某个消息的确认，说明之前的消息都已经确认了。</p>
+<p><font color="red"><strong>滑动窗口</strong></font>：窗口里的数据都可以发送，只要窗口内的数据发送的确认号到达了，就往前继续滑动。不需要对里面的每个数据进行确认，而采用<font color="red"><strong>累计确认</strong></font>的方法。即只要收到某个消息的确认，说明之前的消息都已经确认了。</p>
 <p>图中 数据5已经收到，窗口直接滑动到6继续发送。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209013106137.png" alt="image-20201209013106137"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209013106137.png" alt="image-20201209013106137"></p>
 <h2 id="TCP协议的可靠传输"><a href="#TCP协议的可靠传输" class="headerlink" title="TCP协议的可靠传输"></a>TCP协议的可靠传输</h2><ul>
 <li>TCP的可靠传输基于连续ARQ协议</li>
 <li>TCP的滑动窗口是以字节为单位</li>
 </ul>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209151112625.png" alt="image-20201209151112625"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209151112625.png" alt="image-20201209151112625"></p>
 <p>假设存在一个窗口大小为7的滑动窗口，收到确认号是22，那么滑动窗口从23开始。此时连续发送了23-26，收到确认号为24，如上图所示，窗口向前滑动两位。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209151330091.png" alt="image-20201209151330091"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201209151330091.png" alt="image-20201209151330091"></p>
 <p>如果出现了仅收到不连续确认号情况。如上图，此时23、24确认号未收到，需要从23开始重传。这样传输效率就不高，则需要一种方法提高传输效率，这就是<strong>选择重传</strong></p>
 <h3 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h3><ul>
 <li>选择重传需要指定需要重传的字节（通过字节的32位序号指定）</li>
@@ -241,8 +241,8 @@
 </ul>
 <p>注意：选择重传是重传整个字节流，而不是单个字节。</p>
 <h2 id="TCP协议的流量控制"><a href="#TCP协议的流量控制" class="headerlink" title="TCP协议的流量控制"></a>TCP协议的流量控制</h2><p>流量控制指让发送方发送速率不要太快。流量控制是使用滑动窗口来实现的</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201211212117045.png" alt="image-20201211212117045"></p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201211212449952.png" alt="image-20201211212449952"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201211212117045.png" alt="image-20201211212117045"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201211212449952.png" alt="image-20201211212449952"></p>
 <p>再进行数据传输之后，接收方将窗口设置为0，停止传送。等待接收方处理完数据之后，发送调整窗口为1000的消息。此时如果该调整窗口的消息发生了丢失，两边都在等待，形成了死锁，该怎么办？（对于接受带ACK的这种确认消息才有超时重传机制，特殊消息不具有）</p>
 <h3 id="坚持定时器"><a href="#坚持定时器" class="headerlink" title="坚持定时器"></a>坚持定时器</h3><ul>
 <li>当发送方接收到窗口为0的消息，则启动坚持定时器</li>
@@ -259,26 +259,26 @@
 <p>当指数增长到<strong>慢启动阈值(ssthresh)<strong>，就不再增长了，进行</strong>拥塞避免算法</strong></p>
 <h3 id="拥塞避免算法"><a href="#拥塞避免算法" class="headerlink" title="拥塞避免算法"></a>拥塞避免算法</h3><p>维护一个拥塞窗口的变量；只要网络不拥塞，就试探着拥塞窗口调大。</p>
 <p>假设前面提到发送报文到达了慢启动阈值16，收到16个报文的确认后，随后发送17个报文，18个报文，直到发生拥塞。</p>
-<img src="计算机网络3/image-20201214203005176.png" alt="image-20201214203005176" style="zoom:67%;" />
+<img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201214203005176.png" alt="image-20201214203005176" style="zoom:67%;">
 
 <p>拥塞控制可以保证网络不发生拥塞的情况下，更多得发送数据</p>
 <h2 id="TCP连接的建立"><a href="#TCP连接的建立" class="headerlink" title="TCP连接的建立"></a>TCP连接的建立</h2><p>TCP首部标记中ACK\SYN\FIN，在TCP连接的建立中非常重要</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201217132914099.png" alt="image-20201217132914099"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201217132914099.png" alt="image-20201217132914099"></p>
 <p>三次握手的过程：</p>
 <ol>
 <li>发送方发送SYN=1,seq=x（同步位是1，序列号为x）的报文，表示请求建立连接</li>
 <li>接收方收到后发送SYN=1,ACK=1,seq=y,ack=x+1（同步位为1，确认位为1，序列号为y，确认号为x+1)的报文，表示收到请求，确认号生效，建立连接</li>
 <li>发送方发送ACK=1,seq=x+1，ack=y+1(确认位为1，序列号为x+1,确认号为y+1)的报文，连接建立成功。</li>
 </ol>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201217134034435.png" alt="image-20201217134034435"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201217134034435.png" alt="image-20201217134034435"></p>
 <h3 id="为什么发送方要发出第三个确认报文呢？"><a href="#为什么发送方要发出第三个确认报文呢？" class="headerlink" title="为什么发送方要发出第三个确认报文呢？"></a>为什么发送方要发出第三个确认报文呢？</h3><p>避免已经失效的连接请求发送到对方，引起错误</p>
 <p>如果第一次连接请求发送后超时，重发之后（假如两次握手建立起连接后），可能会建立起两次连接</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201217134552335.png" alt="image-20201217134552335"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201217134552335.png" alt="image-20201217134552335"></p>
 <h2 id="TCP连接的释放"><a href="#TCP连接的释放" class="headerlink" title="TCP连接的释放"></a>TCP连接的释放</h2><p>第一次挥手：发送方发送FIN=1,seq=u（终止位为1，序列号为u）的报文，表示准备连接释放，发送方进入断开连接的第一次等待状态</p>
 <p>第二次挥手：接收方发送ACK=1,seq=v,ack=u+1(确认位为1，序列号为v，确认号为u+1)的报文，接收方进入关闭等待状态，但是此时接收方还可以继续进行数据传输给发送方。发送方接收到报文后进入断开连接的第二次等待状态。</p>
 <p>第三次挥手：待发送方发送完数据后，就发送FIN=1,ACK=1,seq=w,ack=u+1（终止位为1，确认位为1，序列号为w，确认号为u+1）的报文，随后接收方进入最后确认状态</p>
-<p>第四次挥手：发送方接受到报文后，随即发送ACK=1,seq=u+1,ack=w+1（确认位为1，序列号为u+1，确认号为w+1）的报文，发送方<font color='red'>等待计时器</font>生效，随后进入关闭状态。</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201224163319872.png" alt="image-20201224163319872"></p>
+<p>第四次挥手：发送方接受到报文后，随即发送ACK=1,seq=u+1,ack=w+1（确认位为1，序列号为u+1，确认号为w+1）的报文，发送方<font color="red">等待计时器</font>生效，随后进入关闭状态。</p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201224163319872.png" alt="image-20201224163319872"></p>
 <h3 id="等待定时器"><a href="#等待定时器" class="headerlink" title="等待定时器"></a>等待定时器</h3><p>对于等待定时器，会等待2倍MSL（Max Segment Lifetime）：最长报文段寿命</p>
 <p>MSL建议设置为2分钟</p>
 <p>在等待定时器作用期间不会释放端口（一个TCP连接会占用一个端口），要等待其结束才能重新复用该端口</p>
@@ -297,7 +297,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TCP=&#123;Socket1:Socket2&#125;=&#123;&#123;IP:Port&#125;&#123;IP:Port&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>服务端（左）和客户端（右）套接字编程过程</p>
-<p><img src="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201224172347839.png" alt="image-20201224172347839"></p>
+<p><img src="/2020/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C3/image-20201224172347839.png" alt="image-20201224172347839"></p>
 <p>实例：</p>
 <p>服务端</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">server</span>():</span></span><br><span class="line">    <span class="comment"># 创建socket</span></span><br><span class="line">    s = socket.socket()</span><br><span class="line">    host = <span class="string">&#x27;127.0.0.1&#x27;</span></span><br><span class="line">    port = <span class="number">8000</span></span><br><span class="line">    <span class="comment"># 绑定套接字</span></span><br><span class="line">    s.bind((host, port))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 监听，参数为backlog，代表已建立连接队列和未完成建立的连接队列数之和。</span></span><br><span class="line">    s.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        c, addr = s.accept()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Connect Addr:&#x27;</span>, addr)</span><br><span class="line">        c.send(<span class="string">b&#x27;Welcome to my server&#x27;</span>)</span><br><span class="line">        c.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    server()</span><br></pre></td></tr></table></figure>

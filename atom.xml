@@ -620,9 +620,9 @@
     <category term="Django" scheme="http://123.57.158.5/categories/Python/Django/"/>
     
     
-    <category term="Python" scheme="http://123.57.158.5/tags/Python/"/>
-    
     <category term="Django" scheme="http://123.57.158.5/tags/Django/"/>
+    
+    <category term="Python" scheme="http://123.57.158.5/tags/Python/"/>
     
   </entry>
   

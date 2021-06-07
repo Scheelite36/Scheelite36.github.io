@@ -1,298 +1,32 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux1基本命令(Ubuntu) | 一只柑の博客</title><meta name="keywords" content="Linux,操作系统,Terminal,Ubuntu"><meta name="author" content="一只柑"><meta name="copyright" content="一只柑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="终端的基本操作什么是TTY?  在Linux中，TTY也许是跟终端有关系的最为混乱的术语。TTY是TeleTYpe的一个老缩写。Teletypes，或者teletypewriters，原来指的是电传打字机，是通过串行线用打印机键盘通过阅读和发送信息的东西，和古老的电报机区别并不是很大。之后，当计算机只能以批处理方式运行时（当时穿孔卡片阅读器是唯一一种使程序载入运行的方式），电传打字机成为唯一能够被">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux1基本命令(Ubuntu)">
-<meta property="og:url" content="http://123.57.158.5/2020/12/16/linux-go1/index.html">
-<meta property="og:site_name" content="一只柑の博客">
-<meta property="og:description" content="终端的基本操作什么是TTY?  在Linux中，TTY也许是跟终端有关系的最为混乱的术语。TTY是TeleTYpe的一个老缩写。Teletypes，或者teletypewriters，原来指的是电传打字机，是通过串行线用打印机键盘通过阅读和发送信息的东西，和古老的电报机区别并不是很大。之后，当计算机只能以批处理方式运行时（当时穿孔卡片阅读器是唯一一种使程序载入运行的方式），电传打字机成为唯一能够被">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://cdn.rice-and-bran.site/Linux.jpg">
-<meta property="article:published_time" content="2020-12-16T11:27:07.000Z">
-<meta property="article:modified_time" content="2021-05-23T02:34:39.661Z">
-<meta property="article:author" content="一只柑">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="操作系统">
-<meta property="article:tag" content="Terminal">
-<meta property="article:tag" content="Ubuntu">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://cdn.rice-and-bran.site/Linux.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://123.57.158.5/2020/12/16/linux-go1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
-  google_ad_client: '',
-  enable_page_level_ads: 'true'
-});</script><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Linux1基本命令(Ubuntu)',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2021-05-23 10:34:39'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+extends includes/layout.pug
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    article#article-container.post-content!=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="一只柑の博客" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://cdn.rice-and-bran.site/Linux.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">一只柑の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux1基本命令(Ubuntu)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-16T11:27:07.000Z" title="发表于 2020-12-16 19:27:07">2020-12-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-23T02:34:39.661Z" title="更新于 2021-05-23 10:34:39">2021-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="终端的基本操作"><a href="#终端的基本操作" class="headerlink" title="终端的基本操作"></a>终端的基本操作</h2><p>什么是TTY?</p>
-<blockquote>
-<p>在Linux中，TTY也许是跟终端有关系的最为混乱的术语。TTY是TeleTYpe的一个老缩写。Teletypes，或者teletypewriters，原来指的是电传打字机，是通过串行线用打印机键盘通过阅读和发送信息的东西，和古老的电报机区别并不是很大。之后，当计算机只能以批处理方式运行时（当时穿孔卡片阅读器是唯一一种使程序载入运行的方式），电传打字机成为唯一能够被使用的“实时”输入/输出设备。最终，电传打字机被键盘和显示器终端所取代。</p>
-<p>在Linux 系统中，计算机显示器通常被称为控制台终端(Console）。它仿真了类型为Linux的一种终端(TERM=Linux），并且有一些设备特殊文件与之相关联：tty0、tty1、tty2 等。当你在控制台上登录时，使用的是tty1。使用Alt+[F1—F6]组合键时，我们就可以切换到tty2、tty3等上面去。tty1–tty6等称为虚拟终端，而tty0则是当前所使用虚拟终端的一个别名，系统所产生的信息会发送到该终端上（这时也叫控制台终端）。因此不管当前正在使用哪个虚拟终端，系统信息都会发送到控制台终端上。/dev/console即控制台，是与操作系统交互的设备，系统将一些信息直接输出到控制台上。只有在单用户模式下，才允许用户登录控制台。</p>
-</blockquote>
-<p><code>ctrl+alt+f1</code>：回到图形界面</p>
-<p><code>ctrl+alt+f2</code>：对应终端2(tty2)，f3-f6分别对应tty3-tty6</p>
-<p>但是我们一般常用图形模式的终端。调用方式<code>Ctrl+Alt+T</code></p>
-<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>打开终端后会自动出现命令行提示符</p>
-<p>比如<code>scheelite@scheelte-VirtualBox:~$</code></p>
-<p><code>scheelite</code>是当前用户的名字，Linux是多用户的操作系统，@后面是主机名，：是分隔符，~是当前所在目录的名字，$指示用户拥有的权限，表示普通用户，如果是#怎是root用户</p>
-<p>使用<code>sudo su</code>切换root用户，切换后显示<code>root@scheelte-VirtualBox:/home/scheelite#</code></p>
-<p>使用<code>whoami</code>命令可以获知当前用户名，<code>hostname</code>获知主机名</p>
-<h3 id="基本命令使用"><a href="#基本命令使用" class="headerlink" title="基本命令使用"></a>基本命令使用</h3><p><code>date</code>显示当前时间，<code>ls</code>显示当前所有的目录</p>
-<p>参数是写在命令之后的一些补充选项，空格隔开。</p>
-<p><strong>短参数</strong>：短横线后面加一个字母，可以一次性加多个短参数，也可以合并写。参数的值 <code>-p 10</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command -p -a -T -c</span><br><span class="line">command -paTC</span><br><span class="line"></span><br><span class="line">显示所有文件（包括隐藏文件）</span><br><span class="line">ls -a</span><br></pre></td></tr></table></figure>
+    if theme.reward.enable
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<p><strong>长参数</strong>：以两个短横线开始，只能以空格隔开。参数的值<code>--parameter=10</code></p>
-<p>可以长短参数结合使用</p>
-<p><strong>其他参数</strong>：没有绝对的准则。例如ls命令 后面带了一个参数的话，这是一个目录的路径名的话，那么就会列出此目录下的文件，例如 <code>ls Code</code></p>
-<p>Tab键可以补全命令/路径，敲两下tab键。</p>
-<h3 id="命令行快捷键"><a href="#命令行快捷键" class="headerlink" title="命令行快捷键"></a>命令行快捷键</h3><p>上下键切换历史命令</p>
-<p><code>ctrl+r</code>查找使用过的命令；</p>
-<p><code>history</code>显示所有输入的命令；</p>
-<p><code>ctrl+l</code>清屏；</p>
-<p><code>ctrl+d</code>给终端传递EOF（文件结束符）；</p>
-<p><code>shift+PgUp</code>用于向上滚屏</p>
-<p><code>ctrl+a</code>/<code>home </code>     <code>ctrl+e</code>/<code>end</code>光标跳到一行命令的开始/结尾</p>
-<p><code>ctrl+u</code>/<code>ctrl+k</code>删除光标左侧/右侧的命令</p>
-<p><code>ctrl+w</code>删除光标左侧的一个“单词”（空格隔开的一部分）</p>
-<p><code>ctrl+y</code>用于粘贴上面u/k/w删除的字符串</p>
-<h2 id="Linux下的文件操作"><a href="#Linux下的文件操作" class="headerlink" title="Linux下的文件操作"></a>Linux下的文件操作</h2><h3 id="Linux下文件目录组织形式"><a href="#Linux下文件目录组织形式" class="headerlink" title="Linux下文件目录组织形式"></a>Linux下文件目录组织形式</h3><ul>
-<li>在Linux中<font color='red'>一切都是文件</font>，不像windows分为文件和非文件，甚至连目录也是文件</li>
-<li>Linux中只有一个根目录就是<code>/</code>，最顶级的目录，不同于windows很多个盘：<code>C:\</code>等</li>
-<li>windows中用反斜杠表明目录层级和包含关系，而Linux中用<code>/</code>来表示，例如：<code>/usr/bin</code></li>
-<li>一般在Linux命令目录时尽量不使用空格或其他特殊符号，尽量用小写字母</li>
-<li>linux中以点开头的文件是隐藏文件。但是<code>.</code>（一个点）表示当前目录，<code>..</code>（两个点）表示上一级目录</li>
-</ul>
-<p>/bin：包含用户可执行的二进制文件；/boot: 包含linux启动密切相关的文件；/etc：系统配置文件；/home: 用户私人目录；/lib：包含被程序调用的库文件，<code>.os</code>结尾，类似于win的dll；/media: 访问外设（usb等）内容；/mnt：临时挂载一些装置；/opt：用于安装第三方软件；/root：超级用户目录；/sbin系统级重要可执行文件；/usr：安装大部分用户需要调用的程序 ….；/var：程序日志文件</p>
-<p><code>pwd</code>命令 获知当前目录</p>
-<p><code>which</code>命令获取命令的可执行文件的位置，参数为命令，如<code>which pwd</code>获取pwd命令可执行文件的位置。</p>
-<h3 id="ls、cd、du命令"><a href="#ls、cd、du命令" class="headerlink" title="ls、cd、du命令"></a>ls、cd、du命令</h3><p>不带参数列出非隐藏文件，-a参数列出所有文件，-A列出不带<code>.</code>和<code>..</code>的目录，</p>
-<p>-l参数列出文件详细信息, <code>total xx</code> 表示当前目录的总字节数（k）</p>
-<p><img src="linux-go1/image-20201231122820898.png" alt="image-20201231122820898"></p>
-<p>里面每一行的内容分别代表：文件权限、链接数目、文件所有者、文件所在的群组、文件大小（仅指目录文件的大小）、文件修改时间、名称</p>
-<p>可以很多参数合并一起使用如<code>ls -ltah</code>显示所有文件详情</p>
-<h4 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h4><p>change directory 切换路径</p>
-<p><code>cd ~</code>或直接<code>cd</code>会到直接回到家目录</p>
-<h4 id="du命令"><a href="#du命令" class="headerlink" title="du命令"></a>du命令</h4><p>disk usage, du可以让我们直到文件和目录所占的空间大小；相比<code>ls -l</code>命令，du命令统计的才是真正的文件大小</p>
-<p><code>-h</code>便于阅读模式，<code>-a</code>显示所有目录、文件的大小，<code>-s</code>直接出现总大小</p>
-<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>syslog文件位于<code>/var/log</code>这个目录中，记录了电脑的所有事情的日志。</p>
-<h4 id="cat和less命令"><a href="#cat和less命令" class="headerlink" title="cat和less命令"></a>cat和less命令</h4><p>cat命令和less命令：显示文件内容，不能对内容进行修改。</p>
-<p>cat一次性在终端显示文件所有内容，加上想要显示的文件路径即可：<code>cat syslog</code>，中间加上<code>-n</code>参数显示行号。适合显示小文件</p>
-<p>less命令分页显示文件内容。空格键翻页显示，<code>↓</code>/<code>enter</code>显示下一行，<code>d</code>前进半个屏幕，<code>b</code>向上一页，<code>y</code>/<code>↑</code>显示到上一行，<code>=</code>等号显示你在当前文件中的位置，h键进入使用手册，<code>/</code>进入搜索模式（按n键在结果中跳转，shift+n往上跳转），</p>
-<h4 id="head和tail命令"><a href="#head和tail命令" class="headerlink" title="head和tail命令"></a>head和tail命令</h4><p>显示文件开头和结尾几行。</p>
-<p>可以加上参数<code>tail -n 5 syslog</code>显示末尾五行，</p>
-<p>配合<code>-f</code>参数可实时追踪文件的更新。</p>
-<p><code>tail -f syslog</code>实时观察syslog文件的增加内容，默认一秒检查是否有更新，也可指定间隔参数，比如<code>tail -f -s 4 syslog</code>设置为4秒</p>
-<h4 id="文件创建"><a href="#文件创建" class="headerlink" title="文件创建"></a>文件创建</h4><p>touch命令直接更跟路径，创建空白文件</p>
-<p>mkdir创建新文件夹，可以用<code>-p</code>来递归创建目录结构：<code>mkdir -p one/two/three</code></p>
-<h4 id="拷贝、移动文件或目录"><a href="#拷贝、移动文件或目录" class="headerlink" title="拷贝、移动文件或目录"></a>拷贝、移动文件或目录</h4><p>cp命令拷贝，<code>cp file file_copy</code>拷贝file_copy文件，可以换为目录名就可以复制到那里去并改名</p>
-<p>拷贝目录需要在cp命令之后加上<code>-r</code>或者<code>-R</code>参数，目录中所有内容被拷贝</p>
-<p><strong>使用通配符*</strong></p>
-<p>用于代替任何字符，和正则一样。<code>cp *.txt folder</code>把当前目录下的所有txt文件拷贝到folder目录中取</p>
-<p>mv命令移动，使用类似cp，但是移动目录不需要添加额外的参数，和移动文件一样，同样也可以使用通配符。</p>
-<p>mv命令还可以重命名，使用方法一样。</p>
-<h4 id="删除文件和目录"><a href="#删除文件和目录" class="headerlink" title="删除文件和目录"></a>删除文件和目录</h4><p>rm命令用于删除文件和目录，但是不可撤销。直接加文件名</p>
-<p>加上<code>-i</code>参数会询问是否需要删除，<code>-r</code>参数递归（recursive）删除，删除目录</p>
-<h3 id="文件中的软链接和硬链接"><a href="#文件中的软链接和硬链接" class="headerlink" title="文件中的软链接和硬链接"></a>文件中的软链接和硬链接</h3><p>ln命令用于在文件之间创建链接。</p>
-<p>Linux下有两种链接类型：软链接（Symbolic link）和硬链接（Physical link）。Linux文件有三部分：文件名、权限和文件内容。</p>
-<p><strong>Linux文件存储</strong>：每个文件的文件内容被分配到一个inode，因此每个文件名都绑定到它的文件内容（用inode标识）</p>
-<p><strong>硬链接原理</strong>：使链接的两个文件共享同样的文件内容，就是同样的inode。如果两个文件之间有了硬链接，修改文件修改的是同一块内容。硬链接一般只能创建指向文件的硬链接，而<strong>软连接</strong>可以指向文件和目录。</p>
-<p><code>ln file1 file2</code>这个命令创建了一个file1的硬链接file2。</p>
-<p><em>此时如果通过<code>ls -i</code>来查看文件相关的inode信息，会发现二者指向了同一个inode</em></p>
-<p>对于硬链接来说，删除任意一方文件，共同指向的文件内容并不会从硬盘上被删除，只有同时删除，该inode才会被删除。</p>
-<p><img src="linux-go1/image-20210102142105447.png" alt="image-20210102142105447"></p>
-<p>第一列是inode信息，第三列中数字为2，对于文件来说指的是有相同inode号的文件数。（对于目录，指的是目录下的文件数）</p>
-<p><strong>软链接</strong>类似与windows下的快捷方式。创建软链接需要带上<code>-s</code>参数</p>
-<p><em>图示创建了file3软链接，链接到file1</em></p>
-<p><img src="linux-go1/image-20210102142711614.png" alt="image-20210102142711614"></p>
-<p>如果删掉了file1，file2就会失效。</p>
-<h2 id="Linux下的权限管理"><a href="#Linux下的权限管理" class="headerlink" title="Linux下的权限管理"></a>Linux下的权限管理</h2><p>在Ubuntu系统中可以用sudo(Substitute User DO)命令暂时成为root超级用户。</p>
-<p><code>sudo su</code>切换超级用户，输入exit推出也可以<code>sudo</code>后面直接接待执行命令</p>
-<p><code>adduser username</code>命令添加用户</p>
-<p><code>passwd username</code>命令修改用户密码</p>
-<p><code>deluser username</code>命令删除用户，直接删除，谨慎使用！</p>
-<h3 id="用户群组管理"><a href="#用户群组管理" class="headerlink" title="用户群组管理"></a>用户群组管理</h3><p>如果不设置群组的话，默认是创建一个和用户名一样的群组。当群组多的时候则需要进行管理。</p>
-<p><code>addgroup groupname</code>命令添加新的群组；<code>usermod</code>命令，<code>-l</code>参数可以用于修改用户名，<code>-g</code>参数可用来修改用户的群组：<code>usermod -g groupname username</code></p>
-<p><code>groups username</code>查看用户的所在群组<br><em>添加用户到多个群组<br><code>usermod -G group1,group2,group3 username</code>，<code>-aG</code>参数可以追加而不是移动到这些群组</em></p>
-<p><code>delgroup groupname</code>删除群组</p>
-<h3 id="文件权限设置"><a href="#文件权限设置" class="headerlink" title="文件权限设置"></a>文件权限设置</h3><p><code>chown newuser file</code>命令改变文件所有者，但是文件所属群组依旧不变</p>
-<p><code>chgrp newgroup file</code>命令改变群组，或者<code>chown username:groupname file</code>也可以同时改变群组和所有者</p>
-<p><code>chown</code>的<code>-R</code>参数递归设置子目录和子文件，配合上面的方法使用</p>
-<h4 id="修改访问权限"><a href="#修改访问权限" class="headerlink" title="修改访问权限"></a>修改访问权限</h4><p><strong>权限的原理</strong>：Linux系统中，每个文件和目录都有一系列权限属性，在<code>ls -l</code>运行的第一列信息就是访问权限符。</p>
-<p>第一个字符中：<code>-</code>表示普通文件；<code>d</code>表示目录；<code>l</code>表示软链接文件</p>
-<img src="linux-go1/image-20210102152128235.png" alt="image-20210102152128235" style="zoom:50%;" />
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-<p>后面的字符中，<code>r</code>可读，<code>w</code>可写，<code>x</code>可执行/可读（对于目录），如果相应位置有字母，表示有相应的权限，短横<code>-</code>表示没有相应权限</p>
-<p><img src="linux-go1/image-20210102152505598.png" alt="image-20210102152505598"></p>
-<p>例如file1这个文件<code>-</code>表示普通文件，<code>rw-</code>在sheelite用户下，可读可写，非可执行文件，第二个<code>rw-</code>scheelite群组其他用户也可读可写，不可执行，<code>r--</code>其他用户只能读该文件</p>
-<h4 id="chmod命令改变文件的访问权限"><a href="#chmod命令改变文件的访问权限" class="headerlink" title="chmod命令改变文件的访问权限"></a>chmod命令改变文件的访问权限</h4><p>Linux系统对每种权限（r、w和x）分配了对应的数字</p>
-<table>
-<thead>
-<tr>
-<th>权限</th>
-<th>数字</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>r</td>
-<td>4</td>
-</tr>
-<tr>
-<td>w</td>
-<td>2</td>
-</tr>
-<tr>
-<td>x</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>要合并这些权限，就需要简单的数字相加；比如6表示有读和写的权限</p>
-<img src="linux-go1/113366367897643514.jpg" alt="113366367897643514" style="zoom:33%;" />
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-<p>用三组数字来表示这些权限，例如640：</p>
-<ul>
-<li>6 文件所有者有读写权限</li>
-<li>4 文件所在群组其他用户具有读的权限</li>
-<li>0 除此之外其他用户没有任何权限</li>
-</ul>
-<p><code>chmod 640 file1</code>修改文件权限：</p>
-<p><img src="linux-go1/image-20210102153745678.png" alt="image-20210102153745678"></p>
-<p><strong>用字母划分权限</strong></p>
-<p><code>chmod u+rx file1</code>对文件的所有者增加读和运行的权限</p>
-<p><code>chmod g+r o-r file</code>文件file的群组其他用户增加读的权限，其他用户移除读的权限</p>
-<p>配合<code>-R</code>参数可以递归修改目录及其中的文件</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">一只柑</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://123.57.158.5/2020/12/16/linux-go1/">http://123.57.158.5/2020/12/16/linux-go1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://123.57.158.5" target="_blank">一只柑の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="post-meta__tags" href="/tags/Terminal/">Terminal</a><a class="post-meta__tags" href="/tags/Ubuntu/">Ubuntu</a></div><div class="post_share"><div class="social-share" data-image="http://cdn.rice-and-bran.site/Linux.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/12/28/First-Aid-Elementary-Course/"><img class="prev-cover" src="http://cdn.rice-and-bran.site/ICRC.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">红会急救培训笔记</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/08/%E7%AE%97%E6%B3%951/"><img class="next-cover" src="/img/psb.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据结构与算法1查找与排序</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/01/06/Linux文本编辑器及软件安装/" title="Linux文本编辑器及软件安装"><img class="cover" src="http://cdn.rice-and-bran.site/Linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-06</div><div class="title">Linux文本编辑器及软件安装</div></div></a></div><div><a href="/2020/05/11/Linux2/" title="操作系统（提升篇）"><img class="cover" src="http://cdn.rice-and-bran.site/Linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-11</div><div class="title">操作系统（提升篇）</div></div></a></div><div><a href="/2020/08/13/linux3/" title="操作系统（实践）"><img class="cover" src="http://cdn.rice-and-bran.site/Linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-13</div><div class="title">操作系统（实践）</div></div></a></div><div><a href="/2020/04/15/操作系统/" title="操作系统（基础篇）"><img class="cover" src="http://cdn.rice-and-bran.site/Linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-15</div><div class="title">操作系统（基础篇）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">一只柑</div><div class="author-info__description">心中有海 不赶浪潮</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">终端的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="toc-number">1.1.</span> <span class="toc-text">命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">基本命令使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.3.</span> <span class="toc-text">命令行快捷键</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">Linux下的文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E4%B8%8B%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E5%BD%A2%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">Linux下文件目录组织形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls%E3%80%81cd%E3%80%81du%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.</span> <span class="toc-text">ls、cd、du命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cd%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">cd命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#du%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.2.</span> <span class="toc-text">du命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.</span> <span class="toc-text">文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cat%E5%92%8Cless%E5%91%BD%E4%BB%A4"><span class="toc-number">2.3.1.</span> <span class="toc-text">cat和less命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#head%E5%92%8Ctail%E5%91%BD%E4%BB%A4"><span class="toc-number">2.3.2.</span> <span class="toc-text">head和tail命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"><span class="toc-number">2.3.3.</span> <span class="toc-text">文件创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E3%80%81%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-number">2.3.4.</span> <span class="toc-text">拷贝、移动文件或目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-number">2.3.5.</span> <span class="toc-text">删除文件和目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="toc-number">2.4.</span> <span class="toc-text">文件中的软链接和硬链接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">Linux下的权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BE%A4%E7%BB%84%E7%AE%A1%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">用户群组管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">文件权限设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="toc-number">3.2.1.</span> <span class="toc-text">修改访问权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chmod%E5%91%BD%E4%BB%A4%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="toc-number">3.2.2.</span> <span class="toc-text">chmod命令改变文件的访问权限</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/23/hello-world/" title="Hello World"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/05/23/hello-world/" title="Hello World">Hello World</a><time datetime="2021-05-23T02:34:37.977Z" title="发表于 2021-05-23 10:34:37">2021-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二叉树的一些性质及遍历"/></a><div class="content"><a class="title" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历">二叉树的一些性质及遍历</a><time datetime="2021-03-11T02:05:20.000Z" title="发表于 2021-03-11 10:05:20">2021-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装"><img src="http://cdn.rice-and-bran.site/Linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux文本编辑器及软件安装"/></a><div class="content"><a class="title" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装">Linux文本编辑器及软件安装</a><time datetime="2021-01-06T15:26:14.000Z" title="发表于 2021-01-06 23:26:14">2021-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络5之实践网络分析异步任务（更新中"/></a><div class="content"><a class="title" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中">计算机网络5之实践网络分析异步任务（更新中</a><time datetime="2020-12-30T16:43:42.000Z" title="发表于 2020-12-31 00:43:42">2020-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络4应用层"/></a><div class="content"><a class="title" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层">计算机网络4应用层</a><time datetime="2020-12-29T07:02:01.000Z" title="发表于 2020-12-29 15:02:01">2020-12-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 一只柑</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
-  if (window.mermaidJsLoad) mermaid.init()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
-      window.mermaidJsLoad = true
-      mermaid.initialize({
-        theme: 'default',
-      })
-      false && mermaid.init()
-    })
-  }
-}</script></div></div></body></html>
+    if page.comments !== false && theme.comments && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
+      

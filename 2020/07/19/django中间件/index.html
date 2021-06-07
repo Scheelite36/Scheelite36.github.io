@@ -1,32 +1,252 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Django命令工具与中间件——以积分商城为例 | ‘一只柑の博客’</title><meta name="keywords" content="Python,Django"><meta name="author" content="一只柑"><meta name="copyright" content="一只柑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="结合django积分商城项目食用 最佳 思考以下场景的实现：  向30天未登录的用户发送通知（邮件&#x2F;短信） 如何对Django进行扩展 拦截非法请求 如何快速高效的写接口、接入Webscoket等  Django命令行工具介绍django内置命令介绍使用django命令行工具： django-admin（全局的） ​    例如: django-admin startproject project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django命令工具与中间件——以积分商城为例">
+<meta property="og:url" content="http://123.57.158.5/2020/07/19/django%E4%B8%AD%E9%97%B4%E4%BB%B6/index.html">
+<meta property="og:site_name" content="‘一只柑の博客’">
+<meta property="og:description" content="结合django积分商城项目食用 最佳 思考以下场景的实现：  向30天未登录的用户发送通知（邮件&#x2F;短信） 如何对Django进行扩展 拦截非法请求 如何快速高效的写接口、接入Webscoket等  Django命令行工具介绍django内置命令介绍使用django命令行工具： django-admin（全局的） ​    例如: django-admin startproject project">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.rice-and-bran.site/Django_cover1.jpg">
+<meta property="article:published_time" content="2020-07-19T15:22:59.000Z">
+<meta property="article:modified_time" content="2021-05-23T02:34:36.843Z">
+<meta property="article:author" content="一只柑">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.rice-and-bran.site/Django_cover1.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://123.57.158.5/2020/07/19/django%E4%B8%AD%E9%97%B4%E4%BB%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Django命令工具与中间件——以积分商城为例',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-23 10:34:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    article#article-container.post-content!=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-    if theme.reward.enable
-      !=partial('includes/post/reward', {}, {cache: true})
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="‘一只柑の博客’" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://cdn.rice-and-bran.site/Django_cover1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">‘一只柑の博客’</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Django命令工具与中间件——以积分商城为例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-19T15:22:59.000Z" title="发表于 2020-07-19 23:22:59">2020-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-23T02:34:36.843Z" title="更新于 2021-05-23 10:34:36">2021-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/Django/">Django</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>结合django积分商城项目食用 最佳</p>
+<p>思考以下场景的实现：</p>
+<ul>
+<li>向30天未登录的用户发送通知（邮件/短信）</li>
+<li>如何对Django进行扩展</li>
+<li>拦截非法请求</li>
+<li>如何快速高效的写接口、接入Webscoket等</li>
+</ul>
+<h2 id="Django命令行工具介绍"><a href="#Django命令行工具介绍" class="headerlink" title="Django命令行工具介绍"></a>Django命令行工具介绍</h2><h3 id="django内置命令介绍"><a href="#django内置命令介绍" class="headerlink" title="django内置命令介绍"></a>django内置命令介绍</h3><p>使用django命令行工具：</p>
+<p>django-admin（全局的）</p>
+<p>​    例如: django-admin startproject project_name</p>
+<p>python manage.py（在django根路径使用）</p>
+<p>​    manage.py会在每个Django项目中自动生成，二者命令相同，manage.py方便在项目中使用</p>
+<p>常用内置命令：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个django项目（工程）</span></span><br><span class="line">django-admin startrproject name</span><br><span class="line"><span class="comment"># 在项目中创建一个应用（app）</span></span><br><span class="line">python manage.py startapp name</span><br><span class="line"><span class="comment"># 启动一个开发服务器</span></span><br><span class="line">python manage.py runserver</span><br><span class="line"><span class="comment"># 启动开发服务器且自定义服务器地址，例如在局域网中访问</span></span><br><span class="line">python manage.py runserver <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8080</span></span><br><span class="line"><span class="comment"># 创建超级管理员</span></span><br><span class="line">python manage.py createsuperuser</span><br><span class="line"><span class="comment"># 更改用户密码</span></span><br><span class="line">python manage.py changepassword</span><br><span class="line"><span class="comment"># 检查djangoORM模型</span></span><br><span class="line">python manage.py check</span><br><span class="line"><span class="comment"># 生成同步原语</span></span><br><span class="line">python manage.py makemigrations</span><br><span class="line"><span class="comment"># 模型同步</span></span><br><span class="line">python manage.py migrate</span><br><span class="line"><span class="comment"># 收集依赖中的静态文件</span></span><br><span class="line"><span class="comment"># 需要在settings.py中加一个STATIC_ROOT = os.path.join(BASE_DIR, &#x27;static&#x27;)</span></span><br><span class="line"><span class="comment"># 该命令会把项目中的css、js、图片等收集起来</span></span><br><span class="line">python manage.py collectstatic</span><br><span class="line"><span class="comment"># django控制台</span></span><br><span class="line">python manage.py shell</span><br><span class="line"><span class="comment"># 清除过期会话</span></span><br><span class="line">python manage.py clearsessions</span><br></pre></td></tr></table></figure>
 
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
+<h3 id="自定义django命令行工具"><a href="#自定义django命令行工具" class="headerlink" title="自定义django命令行工具"></a>自定义django命令行工具</h3><p>可以用于扩展django项目的功能，比如需要更新订单 将过期订单取消。给长时间未登录用户发邮箱。</p>
+<p>第一步：创建指定的目录及文件结构</p>
+<img src="django中间件/image-20200724220240580.png" alt="image-20200724220240580" style="zoom:50%;" />
 
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
+<p>按文件名及文件结构需要按照标准来！</p>
+<p>第二步：实现自定义命令</p>
+<p>实现django.core.management.base.BaseCommand的子类</p>
+<p>添加命令参数add_arguments</p>
+<p>处理命令逻辑handle</p>
+<p>显示处理过程(self.stdout.write/self.stderr.write)</p>
+<p>update.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"> 更新订单状态</span></span><br><span class="line"><span class="string"> 订单超过半小时不支付，取消订单，释放库存</span></span><br><span class="line"><span class="string"> &quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> django.core.management.base <span class="keyword">import</span> BaseCommand</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Command</span>(<span class="params">BaseCommand</span>):</span></span><br><span class="line">    <span class="built_in">help</span> = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        更新订单状态</span></span><br><span class="line"><span class="string">        回收订单</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_arguments</span>(<span class="params">self, parser</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        添加命令的参数</span></span><br><span class="line"><span class="string">        1.回收所有超时未知的订单</span></span><br><span class="line"><span class="string">        python manage.py update --all</span></span><br><span class="line"><span class="string">        2.指定回收某一个订单</span></span><br><span class="line"><span class="string">        python manage.py update --one 20001xxx</span></span><br><span class="line"><span class="string">        :param parser: 用户输入的参数，判断具体的命令内容</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        parser.add_argument(</span><br><span class="line">            <span class="string">&#x27;--all&#x27;</span>,</span><br><span class="line">            <span class="comment"># store_true代表 --all后面可以不接参数</span></span><br><span class="line">            action=<span class="string">&#x27;store_true&#x27;</span>,</span><br><span class="line">            dest=<span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">            default=<span class="literal">False</span>,</span><br><span class="line">            <span class="built_in">help</span>=<span class="string">&#x27;回收所有未超时的订单&#x27;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        parser.add_argument(</span><br><span class="line">            <span class="string">&#x27;--one&#x27;</span>,</span><br><span class="line">            action=<span class="string">&#x27;store&#x27;</span>,</span><br><span class="line">            dest=<span class="string">&#x27;one&#x27;</span>,</span><br><span class="line">            default=<span class="literal">False</span>,</span><br><span class="line">            <span class="built_in">help</span>=<span class="string">&#x27;回收所某一个订单&#x27;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span>(<span class="params">self, *args, **options</span>):</span></span><br><span class="line">        <span class="comment"># 省略了逻辑处理的部分，直接通过打印内容演示该功能</span></span><br><span class="line">        <span class="keyword">if</span> options[<span class="string">&#x27;all&#x27;</span>]:</span><br><span class="line">            self.stdout.write(<span class="string">&#x27;开始回收订单&#x27;</span>)</span><br><span class="line">            self.stdout.write(<span class="string">&#x27;---------&#x27;</span>)</span><br><span class="line">            self.stdout.write(<span class="string">&#x27;处理完成&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> options[<span class="string">&#x27;one&#x27;</span>]:</span><br><span class="line">            self.stdout.write(<span class="string">&#x27;开始回收订单&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(options[<span class="string">&#x27;one&#x27;</span>]))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.stderr.write(<span class="string">&#x27;指令异常&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-      
+<p><font color='red'>parser.add_argument()使用到了python的argparser库，这个库是用于生成命令行相关功能的库，django在这里自动引用了该库。详见python文档</font></p>
+<p><img src="django%E4%B8%AD%E9%97%B4%E4%BB%B6/image-20200724225803048.png" alt="image-20200724225803048"></p>
+<h2 id="Django中间件开发与使用"><a href="#Django中间件开发与使用" class="headerlink" title="Django中间件开发与使用"></a>Django中间件开发与使用</h2><h3 id="请求上下文"><a href="#请求上下文" class="headerlink" title="请求上下文"></a>请求上下文</h3><p>上下文处理器context_processors。在项目settings.py模板中可见</p>
+<p><img src="django%E4%B8%AD%E9%97%B4%E4%BB%B6/image-20200724234934355.png" alt="image-20200724234934355"></p>
+<ul>
+<li><p>有渲染上下文Context、请求上下文RequestContext</p>
+</li>
+<li><p>连接views（视图）和templates（模板）</p>
+</li>
+<li><p>场景举例：</p>
+<p>在每个页面都显示ip地址，多个页面展示购物车信息</p>
+</li>
+</ul>
+<p>在模块中新建context_processors.py文件</p>
+<p>在这个文件中我们甚至可以把整个项目中的模板变量写入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> Sum</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mall.models <span class="keyword">import</span> Product</span><br><span class="line"><span class="keyword">from</span> mine.models <span class="keyword">import</span> Cart, Order</span><br><span class="line"><span class="keyword">from</span> system.models <span class="keyword">import</span> Slider, News</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> constants</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">context</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="comment"># 初始化数据 方便游客模式的内容显示</span></span><br><span class="line">    cart_list = []</span><br><span class="line">    cart_count = <span class="number">0</span></span><br><span class="line">    total = &#123;<span class="string">&#x27;amount__sum&#x27;</span>:<span class="number">0</span>,<span class="string">&#x27;count__sum&#x27;</span>:<span class="number">0</span>&#125;</span><br><span class="line">    status = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> request.user.is_authenticated:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            status = <span class="built_in">int</span>(request.GET.get(<span class="string">&#x27;status&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            status = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 查询添加到购物车中的商品</span></span><br><span class="line">        cart_list = Cart.objects.<span class="built_in">filter</span>(user=request.user, status=constants.ORDER_STATUS_INIT)</span><br><span class="line">        <span class="comment"># 购物车中的商品数</span></span><br><span class="line">        cart_count = cart_list.count()</span><br><span class="line">        <span class="comment"># 通过聚合函数查询商品总额 然后传入模板</span></span><br><span class="line">        total = cart_list.aggregate(Sum(<span class="string">&#x27;amount&#x27;</span>), Sum(<span class="string">&#x27;count&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    now_time = datetime.now()</span><br><span class="line">    <span class="comment"># 查询首页轮播图</span></span><br><span class="line">    slider_list = Slider.objects.<span class="built_in">filter</span>(types=constants.SLIDER_TYPE_INDEX)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 查询首页通知通知 顶置 有效 在生效时间内</span></span><br><span class="line">    notice_list = News.objects.<span class="built_in">filter</span>(types=constants.NEWS_TYPE_NOTICES, is_top=<span class="literal">True</span>,</span><br><span class="line">                                      is_valid=<span class="literal">True</span>, start_time__lte=now_time,</span><br><span class="line">                                      end_time__gte=now_time)</span><br><span class="line">    <span class="comment"># 首页的精选推荐显示</span></span><br><span class="line">    jxtj_list = Product.objects.<span class="built_in">filter</span>(is_valid=<span class="literal">True</span>, status=constants.PRODUCT_STATUS_SELL, tags__code=<span class="string">&#x27;jxtj&#x27;</span>)</span><br><span class="line">    jstj_list = Product.objects.<span class="built_in">filter</span>(is_valid=<span class="literal">True</span>, status=constants.PRODUCT_STATUS_SELL, tags__code=<span class="string">&#x27;jstj&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">&#x27;constants&#x27;</span>: constants,</span><br><span class="line">        <span class="string">&#x27;status&#x27;</span>: status,</span><br><span class="line">        <span class="string">&#x27;cart_list&#x27;</span>: cart_list,</span><br><span class="line">        <span class="string">&#x27;cart_count&#x27;</span>: cart_count,</span><br><span class="line">        <span class="string">&#x27;amount&#x27;</span>: total[<span class="string">&#x27;amount__sum&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;count&#x27;</span>: total[<span class="string">&#x27;count__sum&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;slider_list&#x27;</span>: slider_list,</span><br><span class="line">        <span class="string">&#x27;notice_list&#x27;</span>: notice_list,</span><br><span class="line">        <span class="string">&#x27;jxtj_list&#x27;</span>: jxtj_list,</span><br><span class="line">        <span class="string">&#x27;jstj_list&#x27;</span>: jstj_list,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>同时在settings.py中添加该上下文处理器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;mine.context_processors.context&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，虽然context_processor.py文件处于模块中，但是该上下文处理器<font color='red'>能够在整个项目中起作用</font>，即 数据会传入所有模板中</p>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>当浏览器发送请求，会经过所有的中间件，然后到达视图，然后返回。如果被其中的中间件拦截，则会被拦截请求</p>
+<p><img src="django%E4%B8%AD%E9%97%B4%E4%BB%B6/image-20200727215745788.png" alt="image-20200727215745788"></p>
+<p>自定义中间件：<br>步骤一：实现中间件，处理业务逻辑</p>
+<ul>
+<li>方式一：函数式自定义中间件</li>
+<li>方式二：OOP（面向对象）自定义中间件</li>
+</ul>
+<p>步骤二：激活中间件，添加到settings.py配置</p>
+<p>举例：用户非法请求访问。添加ip地址黑名单，在名单内的用户限制访问（使用函数式方法）</p>
+<p>在项目utils中新建middleware.py文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ip_middleware</span>(<span class="params">get_response</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">midddleware</span>(<span class="params">request</span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 请求到达前的业务逻辑</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;请求到达前的业务逻辑&#x27;</span>)</span><br><span class="line">        <span class="comment"># 请求不满足业务逻辑：ip限制</span></span><br><span class="line">        ip = request.META.get(<span class="string">&#x27;REMOTE_ADDR&#x27;</span>,<span class="literal">None</span>)</span><br><span class="line">        id_disable_list = [<span class="string">&#x27;127.0.0.1&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> ip <span class="keyword">in</span> id_disable_list:</span><br><span class="line">            <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;not allowed&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(ip)</span><br><span class="line">        response = get_response(request)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 在视图函数调用之后的业务逻辑</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;在视图函数之后的业务逻辑&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> midddleware</span><br></pre></td></tr></table></figure>
+
+<p>在项目settings.py中引入中间件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;utils.middleware.ip_middleware&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后当127.0.0.1的ip访问时候就会被直接拦截，且返回‘not allowed’提示</p>
+<p>举例2：模拟用户登录，实现简单的用户登录中间件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthMiddleware</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; 实现用户登录的中间件，获取登录用户信息 &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,get_response</span>):</span></span><br><span class="line">        self.get_response = get_response</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;AuthMiddleware请求到达前的业务逻辑&#x27;</span>)</span><br><span class="line">        <span class="comment"># 从session中获取到用户id，这里&#x27;user_id&#x27;是通过登录视图传入</span></span><br><span class="line">        user_id = request.session.get(<span class="string">&#x27;user_id&#x27;</span>,<span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> user_id:</span><br><span class="line">            user = User.objects.get(<span class="built_in">id</span>=user_id)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            user=<span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        request.mw_user=user</span><br><span class="line">        </span><br><span class="line">        response = self.get_response(request)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;AuthMiddleware在视图函数调用后的业务逻辑&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+<p>登录视图中传入user_id</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_login</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; 用户登录 &quot;&quot;&quot;</span></span><br><span class="line">    next_url = request.GET.get(<span class="string">&#x27;next&#x27;</span>,<span class="string">&#x27;index&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        form = Login(request=request, data=request.POST)</span><br><span class="line">        <span class="comment"># 验证表单的合法性且获取数据</span></span><br><span class="line">        <span class="keyword">if</span> form.is_valid():</span><br><span class="line">            <span class="comment"># 执行登录</span></span><br><span class="line">            data = form.cleaned_data</span><br><span class="line">            <span class="comment"># 使用auth模块登录</span></span><br><span class="line">            user = authenticate(request, username=data[<span class="string">&#x27;username&#x27;</span>], password=data[<span class="string">&#x27;password&#x27;</span>])</span><br><span class="line">            <span class="comment"># 登录并跳转</span></span><br><span class="line">            <span class="keyword">if</span> user <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                login(request, user)</span><br><span class="line">                <span class="comment"># </span></span><br><span class="line">                <span class="comment"># 中间件模拟用户登录中 将用户id写入session</span></span><br><span class="line">                request.session[<span class="string">&#x27;user_id&#x27;</span>]=user.<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> redirect(next_url)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># get请求则直接显示该页面</span></span><br><span class="line">            <span class="built_in">print</span>(form.errors)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        form = Login(request)</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;login.html&#x27;</span>, &#123;</span><br><span class="line">        <span class="string">&#x27;form&#x27;</span>: form,</span><br><span class="line">        <span class="string">&#x27;next_url&#x27;</span>:next_url</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>写入项目settings后</p>
+<p>可以在其他视图中通过request.mw_user就查看用户是否登陆以及登录后用户信息</p>
+<p>这样我们就通过中间件实现了 模拟django自带auth模块的用户登录功能</p>
+<h2 id="Django扩展"><a href="#Django扩展" class="headerlink" title="Django扩展"></a>Django扩展</h2><p>常用的Django扩展:</p>
+<ul>
+<li><p>DRF（Django REST Framework）REST接口框架</p>
+<p><a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/">DRF官网</a></p>
+</li>
+<li><p>Django-CMS 内容管理系统</p>
+</li>
+<li><p>Django-debug-toolbar调试工具</p>
+<p>可用于SQL优化查询 前面的ORM文章有讲过</p>
+</li>
+<li><p>Django-channels Websocket通信</p>
+</li>
+</ul>
+<p>使用步骤：</p>
+<p>查：pypi、github、版本兼容情况</p>
+<p>验：用户量、更新频次、文档、社区</p>
+<p>装：pip安装、源码安装、whl安装</p>
+<p>用：对照文档使用 官方社区 github的issues等等</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">一只柑</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://123.57.158.5/2020/07/19/django%E4%B8%AD%E9%97%B4%E4%BB%B6/">http://123.57.158.5/2020/07/19/django%E4%B8%AD%E9%97%B4%E4%BB%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://123.57.158.5" target="_blank">‘一只柑の博客’</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Django/">Django</a></div><div class="post_share"><div class="social-share" data-image="http://cdn.rice-and-bran.site/Django_cover1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/21/python%E7%BC%96%E7%A8%8B%E9%97%AE%E7%AD%94/"><img class="prev-cover" src="http://cdn.rice-and-bran.site/python.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python编程问答基础篇1</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/16/django-error/"><img class="next-cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Django使用的部分报错</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/29/Django安全及维护/" title="Django安全及维护————以积分商城为例"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-29</div><div class="title">Django安全及维护————以积分商城为例</div></div></a></div><div><a href="/2020/04/09/Django框架入门/" title="Django框架入门"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-09</div><div class="title">Django框架入门</div></div></a></div><div><a href="/2020/04/22/Django对象关系映射-ORM/" title="Django对象关系映射(ORM)"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-22</div><div class="title">Django对象关系映射(ORM)</div></div></a></div><div><a href="/2020/07/16/django-error/" title="Django使用的部分报错"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-16</div><div class="title">Django使用的部分报错</div></div></a></div><div><a href="/2020/06/28/django-admin/" title="Django后台管理系统——以积分商城为例"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-28</div><div class="title">Django后台管理系统——以积分商城为例</div></div></a></div><div><a href="/2020/07/02/django-mall3/" title="Django2.2实战积分商城3——后台管理的使用"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="title">Django2.2实战积分商城3——后台管理的使用</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">一只柑</div><div class="author-info__description">心中有海 不赶浪潮</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Django%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Django命令行工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#django%E5%86%85%E7%BD%AE%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">django内置命令介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89django%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">自定义django命令行工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Django%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">Django中间件开发与使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">2.1.</span> <span class="toc-text">请求上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">中间件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Django%E6%89%A9%E5%B1%95"><span class="toc-number">3.</span> <span class="toc-text">Django扩展</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/23/hello-world/" title="Hello World"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/05/23/hello-world/" title="Hello World">Hello World</a><time datetime="2021-05-23T02:34:37.977Z" title="发表于 2021-05-23 10:34:37">2021-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二叉树的一些性质及遍历"/></a><div class="content"><a class="title" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历">二叉树的一些性质及遍历</a><time datetime="2021-03-11T02:05:20.000Z" title="发表于 2021-03-11 10:05:20">2021-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装"><img src="http://cdn.rice-and-bran.site/Linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux文本编辑器及软件安装"/></a><div class="content"><a class="title" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装">Linux文本编辑器及软件安装</a><time datetime="2021-01-06T15:26:14.000Z" title="发表于 2021-01-06 23:26:14">2021-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络5之实践网络分析异步任务（更新中"/></a><div class="content"><a class="title" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中">计算机网络5之实践网络分析异步任务（更新中</a><time datetime="2020-12-30T16:43:42.000Z" title="发表于 2020-12-31 00:43:42">2020-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络4应用层"/></a><div class="content"><a class="title" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层">计算机网络4应用层</a><time datetime="2020-12-29T07:02:01.000Z" title="发表于 2020-12-29 15:02:01">2020-12-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 一只柑</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div></div></body></html>

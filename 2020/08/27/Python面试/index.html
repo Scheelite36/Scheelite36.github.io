@@ -1,32 +1,365 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>python编程问答基础篇2(更新中) | ‘一只柑の博客’</title><meta name="keywords" content="Python,问答题"><meta name="author" content="一只柑"><meta name="copyright" content="一只柑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.def func(a,b&#x3D;[]) 这种写法有什么坑？参数如果不填的话最好设置为None，而不要这样设置为空列表。因为函数在定义的时候b已经被赋值了，而列表是不可变类型，添加元素存储地址不发生改变，下面例子的func(2)结果中返回的列表显然还是第一次调用时候的列表，列表并没有重置。 123456789101112def func(a,b&#x3D;[]):    b.append(a)    retur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python编程问答基础篇2(更新中)">
+<meta property="og:url" content="http://123.57.158.5/2020/08/27/Python%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="‘一只柑の博客’">
+<meta property="og:description" content="1.def func(a,b&#x3D;[]) 这种写法有什么坑？参数如果不填的话最好设置为None，而不要这样设置为空列表。因为函数在定义的时候b已经被赋值了，而列表是不可变类型，添加元素存储地址不发生改变，下面例子的func(2)结果中返回的列表显然还是第一次调用时候的列表，列表并没有重置。 123456789101112def func(a,b&#x3D;[]):    b.append(a)    retur">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.rice-and-bran.site/python.jpg">
+<meta property="article:published_time" content="2020-08-27T12:51:17.000Z">
+<meta property="article:modified_time" content="2021-05-23T02:34:39.993Z">
+<meta property="article:author" content="一只柑">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="问答题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.rice-and-bran.site/python.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://123.57.158.5/2020/08/27/Python%E9%9D%A2%E8%AF%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'python编程问答基础篇2(更新中)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-23 10:34:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    article#article-container.post-content!=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-    if theme.reward.enable
-      !=partial('includes/post/reward', {}, {cache: true})
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="‘一只柑の博客’" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://cdn.rice-and-bran.site/python.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">‘一只柑の博客’</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">python编程问答基础篇2(更新中)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-27T12:51:17.000Z" title="发表于 2020-08-27 20:51:17">2020-08-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-23T02:34:39.993Z" title="更新于 2021-05-23 10:34:39">2021-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-def-func-a-b-这种写法有什么坑？"><a href="#1-def-func-a-b-这种写法有什么坑？" class="headerlink" title="1.def func(a,b=[]) 这种写法有什么坑？"></a>1.<code>def func(a,b=[])</code> 这种写法有什么坑？</h2><p>参数如果不填的话最好设置为None，而不要这样设置为空列表。因为函数在定义的时候b已经被赋值了，而列表是不可变类型，添加元素存储地址不发生改变，下面例子的func(2)结果中返回的列表显然还是第一次调用时候的列表，列表并没有重置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">a,b=[]</span>):</span></span><br><span class="line">    b.append(a)</span><br><span class="line">    <span class="keyword">return</span> b</span><br><span class="line"></span><br><span class="line">func(<span class="number">1</span>)</span><br><span class="line">func(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">[1]</span></span><br><span class="line"><span class="string">[1,2]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
 
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
 
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-      
+<h2 id="2-如何实现-“1-2-3”-变成-‘1’-’2’-’3’"><a href="#2-如何实现-“1-2-3”-变成-‘1’-’2’-’3’" class="headerlink" title="2.如何实现 “1,2,3” 变成 [‘1’,’2’,’3’] ?"></a>2.如何实现 “1,2,3” 变成 [‘1’,’2’,’3’] ?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&#x27;1,2,3&#x27;</span></span><br><span class="line">string.split(<span class="string">&#x27;,&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-如何实现-‘1’-’2’-’3’-变成-1-2-3"><a href="#3-如何实现-‘1’-’2’-’3’-变成-1-2-3" class="headerlink" title="3.如何实现[‘1’,’2’,’3’]变成[1,2,3] ?"></a>3.如何实现[‘1’,’2’,’3’]变成[1,2,3] ?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num_list = [<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>]</span><br><span class="line">[<span class="built_in">int</span>(n) <span class="keyword">for</span> n <span class="keyword">in</span> num_list]</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-比较：a-1-2-3-和-b-1-2-3-以及-c-1-2-3-的区别？"><a href="#4-比较：a-1-2-3-和-b-1-2-3-以及-c-1-2-3-的区别？" class="headerlink" title="4.比较：a = [1,2,3] 和 b = [(1),(2),(3) ] 以及 c = [(1,),(2,),(3,) ] 的区别？"></a>4.比较：a = [1,2,3] 和 b = [(1),(2),(3) ] 以及 c = [(1,),(2,),(3,) ] 的区别？</h2><p>a和b里面的元素是一样的，c里面的元素是元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">0</span>] == b[<span class="number">0</span>] <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-如何用一行代码生成-1-4-9-16-25-36-49-64-81-100"><a href="#5-如何用一行代码生成-1-4-9-16-25-36-49-64-81-100" class="headerlink" title="5.如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] ?"></a>5.如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] ?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ i*i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-一行代码实现删除列表中重复的值"><a href="#6-一行代码实现删除列表中重复的值" class="headerlink" title="6.一行代码实现删除列表中重复的值 ?"></a>6.一行代码实现删除列表中重复的值 ?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>]</span><br><span class="line"><span class="built_in">list</span>(<span class="built_in">set</span>(num_list))</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-如何在函数中设置一个全局变量"><a href="#7-如何在函数中设置一个全局变量" class="headerlink" title="7.如何在函数中设置一个全局变量 ?"></a>7.如何在函数中设置一个全局变量 ?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># global关键字(内部作用域想要对外部作用域的变量进行修改)</span></span><br><span class="line"><span class="comment"># 首先外部要有被变量</span></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>()：</span></span><br><span class="line"><span class="function">	<span class="title">global</span> <span class="title">a</span></span></span><br><span class="line"><span class="function">    <span class="title">a</span> = &#x27;<span class="title">wdnmd</span>&#x27;</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"># 调用之后，<span class="title">global</span>才会起作用    </span></span><br><span class="line"><span class="function"><span class="title">func</span>()</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="params">a</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="title">wdnmd</span></span></span><br><span class="line"><span class="function">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-logging模块的作用？以及应用场景？"><a href="#8-logging模块的作用？以及应用场景？" class="headerlink" title="8.logging模块的作用？以及应用场景？"></a>8.logging模块的作用？以及应用场景？</h2><p>日志模块，用来记录用户的行为 或者 代码执行的过程。作用:可以了解程序的运行情况是否正常,在程序出现故障快速定位出错地方以及故障分析。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e539636ab854">https://www.jianshu.com/p/e539636ab854</a></p>
+</blockquote>
+<h2 id="9-请用代码简答实现stack-。"><a href="#9-请用代码简答实现stack-。" class="headerlink" title="9.请用代码简答实现stack 。"></a>9.请用代码简答实现stack 。</h2><blockquote>
+<p>栈（stack）在计算机科学中是限定仅在表尾进行插入或删除操作的线性表。栈是一种数据结构，它按照后进先出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据。</p>
+</blockquote>
+<p>我们来通过list简单实现stack</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.stack=[]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 入栈</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        self.stack.append(value)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 出栈</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.stack:</span><br><span class="line">            self.stack.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> LookupError(<span class="string">&#x27;stack is empty&#x27;</span>)</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_exsit</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">bool</span>(self.stack)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 取出栈中的最新元素</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.stack[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-简述-生成器、迭代器、可迭代对象-以及应用场景？"><a href="#10-简述-生成器、迭代器、可迭代对象-以及应用场景？" class="headerlink" title="10.简述 生成器、迭代器、可迭代对象 以及应用场景？"></a>10.简述 生成器、迭代器、可迭代对象 以及应用场景？</h2><p><strong>生成器</strong>：</p>
+<p>Python使用生成器对延迟操作提供了支持，所谓延迟操作，是指在需要的时候才产生结果，而不是立即产生结果。</p>
+<p>比如我们要循环输出有规律的数组，我们可以计算一次，返回一次，这就是<strong>生成器</strong>，而不是一次性生成列表。</p>
+<p>产生生成器的方法：</p>
+<ol>
+<li><p>生成器表达式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>generator_object = (x*x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>generator_object</span><br><span class="line">&lt;generator <span class="built_in">object</span> &lt;genexpr&gt; at <span class="number">0x000001A77EDB16D8</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>生成器函数</p>
+<blockquote>
+<p>和常规函数定义一样,但是返回语句return被yield语句代替了.yield语句一次返回一个结果,在每个结果中间,挂起函数的状态,以便下次从它离开的地方继续执行.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">generator_func</span>(<span class="params">n</span>):</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> i*i</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>generator_func(<span class="number">10</span>)</span><br><span class="line">&lt;generator <span class="built_in">object</span> generator_func at <span class="number">0x000001A77EDB19A8</span>&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>自动实现迭代器协议:对于生成器,Python会自动实现它的可迭代协议,以便用在可以迭代的地方.所以我们可调用它的next方法,获取下一个元素,并且在没有值可以返回的时候,生成器会自动产生StopIteration异常</p>
+</blockquote>
+<p><strong>迭代器</strong>：</p>
+<p>迭代器对象就是实现了<code>iter()</code> 和 <code>next()</code>方法的对象.其中<code>iter()</code>返回迭代器本身,而<code>next()</code>返回容器的下一个元素,在结尾处引发StopInteration异常.</p>
+<p><code>ir=iter(itrable)</code>将一个可迭代对象转化为迭代器，<code>next(ir)</code>获取下迭代器中的下一个值。</p>
+<p>可迭代对象就是可以转化为迭代器的对象，比如dict、tuple、list、str等。而且他们都可用作for循环，遵循可迭代协议。</p>
+<h2 id="11-用Python实现一个二分查找的函数。"><a href="#11-用Python实现一个二分查找的函数。" class="headerlink" title="11.用Python实现一个二分查找的函数。"></a>11.用Python实现一个二分查找的函数。</h2><blockquote>
+<p>二分查找又称折半查找，优点是比较次数少、查找速度快、平均性能好；其缺点是要求待查表为有序表，且插入删除困难，因此折半查找适用于不经常变动而查找频繁的有序序列。其算法思想是将表中中间位置记录的关键字与要查找的关键字比较，如果两者相等则查找成功，否则利用中间位置将表分成前、后两个子表。如果中间记录的关键字大于查找关键字，则进一步查找前一字表，否则进一步查找后一子表。重复以上过程，直到满足条件则查找成功，否则查找失败。</p>
+</blockquote>
+<p>算法实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span>(<span class="params">array, val</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        python二分查找，查找数值在有序列表中的位置，找到后返回在列表中顺序</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    length = <span class="built_in">len</span>(array)</span><br><span class="line">    low = <span class="number">0</span></span><br><span class="line">    high = length+<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high):</span><br><span class="line">        mid = (low + high) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> val &lt; array[mid]:</span><br><span class="line">            high = mid-<span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> val &gt; array[mid]:</span><br><span class="line">            low = mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line">    <span class="built_in">print</span>(binary_search(array, <span class="number">5</span>))</span><br><span class="line">    <span class="built_in">print</span>(binary_search(array, <span class="number">4</span>))</span><br><span class="line">    <span class="built_in">print</span>(binary_search(array, <span class="number">1</span>))</span><br><span class="line">    <span class="built_in">print</span>(binary_search(array, <span class="number">10</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="12-谈谈你对闭包的理解？"><a href="#12-谈谈你对闭包的理解？" class="headerlink" title="12.谈谈你对闭包的理解？"></a>12.谈谈你对闭包的理解？</h2><blockquote>
+<p>闭包概念：在一个内部函数中，对外部作用域的变量进行引用，(并且一般外部函数的返回值为内部函数)，那么内部函数就被认为是闭包。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">origin</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">closure</span>(<span class="params">y</span>):</span></span><br><span class="line">        <span class="keyword">return</span> x+y</span><br><span class="line">    <span class="keyword">return</span> closure</span><br></pre></td></tr></table></figure>
+
+<p>函数origin中返回的是函数closure，而函数closure对orign的x变量进行了引用，这就是闭包。闭包也是装饰器的原理</p>
+<h2 id="13-os和sys模块的作用？"><a href="#13-os和sys模块的作用？" class="headerlink" title="13.os和sys模块的作用？"></a>13.os和sys模块的作用？</h2><p>Python 的 os 模块封装了常见的文件和目录操作</p>
+<p>下面是部分常见的用法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">os.mkdir</td>
+<td align="center">创建目录</td>
+</tr>
+<tr>
+<td align="center">os.rmdir</td>
+<td align="center">删除目录</td>
+</tr>
+<tr>
+<td align="center">os.rename</td>
+<td align="center">重命名</td>
+</tr>
+<tr>
+<td align="center">os.remove</td>
+<td align="center">删除文件</td>
+</tr>
+<tr>
+<td align="center">os.getcwd</td>
+<td align="center">获取当前工作路径</td>
+</tr>
+<tr>
+<td align="center">os.walk</td>
+<td align="center">遍历目录</td>
+</tr>
+<tr>
+<td align="center">os.path.join</td>
+<td align="center">连接目录与文件名</td>
+</tr>
+<tr>
+<td align="center">os.path.split</td>
+<td align="center">分割文件名与目录</td>
+</tr>
+<tr>
+<td align="center">os.path.abspath</td>
+<td align="center">获取绝对路径</td>
+</tr>
+<tr>
+<td align="center">os.path.dirname</td>
+<td align="center">获取路径</td>
+</tr>
+<tr>
+<td align="center">os.path.basename</td>
+<td align="center">获取文件名或文件夹名</td>
+</tr>
+<tr>
+<td align="center">os.path.splitext</td>
+<td align="center">分离文件名与扩展名</td>
+</tr>
+<tr>
+<td align="center">os.path.isfile</td>
+<td align="center">判断给出的路径是否是一个文件</td>
+</tr>
+<tr>
+<td align="center">os.path.isdir</td>
+<td align="center">判断给出的路径是否是一个目录</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>“sys”即“system”，“系统”之意。该模块提供了一些接口，用于访问 Python 解释器自身使用和维护的变量，同时模块中还提供了一部分函数，可以与解释器进行比较深度的交互。</p>
+</blockquote>
+<p>下面是部分常见的用法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sys.argv</td>
+<td align="center">展示调用python提供的命令行参数</td>
+</tr>
+<tr>
+<td align="center">sys.platform</td>
+<td align="center">运行的平台</td>
+</tr>
+<tr>
+<td align="center">sys.executable</td>
+<td align="center">解释器对应的绝对路径</td>
+</tr>
+<tr>
+<td align="center">sys.getsizeof</td>
+<td align="center">作用对象占用的字节数</td>
+</tr>
+</tbody></table>
+<h2 id="14-Python面向对象中的继承有什么特点？"><a href="#14-Python面向对象中的继承有什么特点？" class="headerlink" title="14.Python面向对象中的继承有什么特点？"></a>14.Python面向对象中的继承有什么特点？</h2><p>提高代码的复用程度，避免重复操作</p>
+<p>特点：</p>
+<ol>
+<li>在继承中基类的构造(<code>__init__()</code>方法)不会被自动调用，它需要在其派生类的构造中亲自专门调用。</li>
+<li>在调用基类的方法时候，需要加上基类的类名前缀，且需要带上self参数变量。区别于在类中调用普通函数时候并不需要带上self参数</li>
+<li>python总是首先札沼对应类型的方法，如果不能在派生类中找到对应的方法，它才开始到基类中逐个查找</li>
+</ol>
+<h2 id="15-面向对象深度优先和广度优先是什么？"><a href="#15-面向对象深度优先和广度优先是什么？" class="headerlink" title="15.面向对象深度优先和广度优先是什么？"></a>15.面向对象深度优先和广度优先是什么？</h2><p>Python的类可以继承多个类，Python的类如果继承了多个类，那么其寻找方法的方式有两种： 当类是经典类时，多继承情况下，会按照深度优先方式查找 （py3） ；当类是新式类时，多继承情况下，会按照广度优先方式查找（ py2）</p>
+<p>简单点说就是：经典类是纵向查找，新式类是横向查找</p>
+<p>经典类和新式类的区别就是，在声明类的时候，新式类需要加上object关键字。</p>
+<p>在python3中默认全是新式类</p>
+<p>来源：<a target="_blank" rel="noopener" href="https://blog.csdn.net/CHERISHGF/article/details/105300072">https://blog.csdn.net/CHERISHGF/article/details/105300072</a></p>
+<h2 id="16-是否使用过functools中的函数？其作用是什么？"><a href="#16-是否使用过functools中的函数？其作用是什么？" class="headerlink" title="16.是否使用过functools中的函数？其作用是什么？"></a>16.是否使用过functools中的函数？其作用是什么？</h2><p>参考：<a target="_blank" rel="noopener" href="https://learnku.com/docs/pymotw/functools-function-operation-toolbox/3376">https://learnku.com/docs/pymotw/functools-function-operation-toolbox/3376</a></p>
+<p>functools用于高阶函数：指那些作用于函数或者返回其他函数的函数。通常情况下，只要是可以被当做函数调用的对象就是这个模块的目标。模块提供了许多改写或拓展函数或其他可调用对象的工具，而无需完全重写它们。</p>
+<blockquote>
+<p>functools 模块中提供的主要工具是 partial 类，它可以用来包装一个可调用对象，使其具有默认参数。生成的对象也是一个可调用对象，并且可以把它当做原来的函数。新生成的可调用对象可接受和原有函数完全一样的参数，并且可以在调用时接受额外的位置参数或关键词参数。partial 可以代替 lambda 为函数参数提供默认值，并同时留下一些没有指定默认值的参数。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foo = partial(<span class="built_in">int</span>,base=<span class="number">2</span>) <span class="comment"># 重新包装int函数为foo，将二进制转换为10进制</span></span><br><span class="line"><span class="built_in">print</span>(foo(<span class="string">&#x27;11110111&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">247</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="17-列举面向对象中带双下划线的特殊方法，如：-new-、-init"><a href="#17-列举面向对象中带双下划线的特殊方法，如：-new-、-init" class="headerlink" title="17.列举面向对象中带双下划线的特殊方法，如：__new__、__init__"></a>17.列举面向对象中带双下划线的特殊方法，如：<code>__new__</code>、<code>__init__</code></h2><ul>
+<li><code>_xx</code>前置单下划线，私有属性或方法，意思是只有类对象和子类对象自己能访问到这些变量；</li>
+<li><code>__xx</code>前置双下划线，私有化属性或方法，无法在外部直接访问（名字重整所以访问不到,只能是允许这个类本身进行访问了。连子类也不可以）。</li>
+<li><code>__xx__</code>：前后双下划线，系统定义名字（这就是在python中强大的魔法方法），因为变量名<code>__xx__</code>对Python 来说有特殊含义，对于普通的变量应当避免这种命名风格。</li>
+<li><code>xx_</code>：后置单下划线，用于避免与Python关键词的冲突</li>
+</ul>
+<p><code>__init__</code>是属于Python中的魔法方法。所谓魔法方法，即是Python中内置的、当进行特定操作时，会自动调用的方法，表现为方法名前后有两个下划线</p>
+<p><code>__new__</code>方法是将对象创建出来的方法。在实际运行中，先走<code>__new__</code>方法，生成对象并返回，后调用<code>__init__</code>方法，将对象的引用传给<code>__init__</code>方法中的self</p>
+<h2 id="18-如何判断是函数还是方法？"><a href="#18-如何判断是函数还是方法？" class="headerlink" title="18.如何判断是函数还是方法？"></a>18.如何判断是函数还是方法？</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Capybara</span>():</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span>(<span class="params">self,food=<span class="string">&#x27;melon&#x27;</span></span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">small_capy = Capybara()</span><br><span class="line"><span class="built_in">print</span>(Capybara.eat)</span><br><span class="line"><span class="built_in">print</span>(small_capy.eat)</span><br><span class="line">&gt;&gt;&gt;&lt;function Capybara.eat at <span class="number">0x0000013BB6436AE8</span>&gt;</span><br><span class="line">&gt;&gt;&gt;&lt;bound method Capybara.eat of &lt;__main__.Capybara <span class="built_in">object</span> at <span class="number">0x0000013BB6395E80</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出通过类的方法调用就是函数，通过实例化调用就是方法</p>
+<h2 id="19-静态方法和类方法区别？"><a href="#19-静态方法和类方法区别？" class="headerlink" title="19.静态方法和类方法区别？"></a>19.静态方法和类方法区别？</h2><p>实例方法只能被实例对象调用，静态方法(由@staticmethod装饰的方法)、类方法(由@classmethod装饰的方法)，可以被类或类的实例对象调用。<br> 实例方法，第一个参数必须要默认传实例对象，一般习惯用self。<br> 静态方法，参数没有要求。<br> 类方法，第一个参数必须要默认传类，一般习惯用cls。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;类三种方法语法形式&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;是类&#123;&#125;的实例方法，只能被实例对象调用&quot;</span>.<span class="built_in">format</span>(Foo))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">static_method</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;是静态方法&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">class_method</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;是类方法&quot;</span>)</span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.instance_method()</span><br><span class="line">foo.static_method()</span><br><span class="line">foo.class_method()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;----------------&#x27;</span>)</span><br><span class="line">Foo.static_method()</span><br><span class="line">Foo.class_method()</span><br></pre></td></tr></table></figure>
+
+<p>作者：python爱好者<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/212b6fdb2c50">https://www.jianshu.com/p/212b6fdb2c50</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="20-列举面向对象中的特殊成员以及应用场景"><a href="#20-列举面向对象中的特殊成员以及应用场景" class="headerlink" title="20.列举面向对象中的特殊成员以及应用场景"></a>20.列举面向对象中的特殊成员以及应用场景</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">__doc__描述类的信息</span></span><br><span class="line"><span class="string">__module__表示当前操作对象在哪个模块</span></span><br><span class="line"><span class="string">__class__表示当前操作对象的类</span></span><br><span class="line"><span class="string">__del__构析方法，当对象在内存中被释放时，自动触发执行</span></span><br><span class="line"><span class="string">__call__如果类中定义了call方法对象后面加括号，触发执行</span></span><br><span class="line"><span class="string">__dict__类或对象中的所有成员</span></span><br><span class="line"><span class="string">__str__如果类中定义了str方法，打印对象时，默认输出该方法的返回值</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="21-1、2、3、4、5-能组成多少个互不相同且无重复的三位数"><a href="#21-1、2、3、4、5-能组成多少个互不相同且无重复的三位数" class="headerlink" title="21.1、2、3、4、5 能组成多少个互不相同且无重复的三位数"></a>21.1、2、3、4、5 能组成多少个互不相同且无重复的三位数</h2><p>实现思路：</p>
+<ol>
+<li>从列表中依次取出一个数，作为百位</li>
+<li>从列表中依次取出一个数，作为十位</li>
+<li>列表中取出剩下的百位。</li>
+</ol>
+<p>实现方式有两种，都是三层循环嵌套，第一种是在每次循环中拷贝原列表，pop出元素，不影响列表完整性；第二种在每次循环pop元素，套下一层循环之后，将元素添加回去，同样不影响列表完整性。</p>
+<p>这里使用的是方法二</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">li = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li)): <span class="comment"># 循环找出百位</span></span><br><span class="line">    x = <span class="built_in">str</span>(li.pop(i))</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li)): <span class="comment"># 在列表剩下的数中寻找十位</span></span><br><span class="line">        y = <span class="built_in">str</span>(li.pop(j))</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li)): <span class="comment"># 在列表剩下的数中寻找个位</span></span><br><span class="line">            z = <span class="built_in">str</span>(li[k]) <span class="comment"># 注意这里不能用pop弹出数据，因为pop之后，列表发生了改变，要依次使用列表中剩余的数字</span></span><br><span class="line">            <span class="built_in">print</span>(x+y+z, end=<span class="string">&quot;|&quot;</span>)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">        li.insert(j, <span class="built_in">int</span>(y)) <span class="comment"># 将数字送回列表，方便下一次循环</span></span><br><span class="line">    li.insert(i, <span class="built_in">int</span>(x))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;number of unrepeated number is&#x27;</span>, count)</span><br></pre></td></tr></table></figure>
+
+<h2 id="22-什么是反射？以及应用场景？"><a href="#22-什么是反射？以及应用场景？" class="headerlink" title="22. 什么是反射？以及应用场景？"></a>22. 什么是反射？以及应用场景？</h2><p>放射：通过字符串映射object对象的方法或者属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hasattr(obj,name_str): 判断objec是否有name_str这个方法或者属性</span><br><span class="line">getattr(obj,name_str): 获取object对象中与name_str同名的方法或者函数</span><br><span class="line">setattr(obj,name_str,value): 为object对象设置一个以name_str为名的value方法或者属性</span><br><span class="line">delattr(obj,name_str): 删除object对象中的name_str方法或者属性</span><br></pre></td></tr></table></figure>
+
+<p>可以用一个方法方便调用不同的函数，比如在我们做接口自动化的时候,需要通过不同的请求方式,调用不同的函数：</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/628f61f01a54">https://www.jianshu.com/p/628f61f01a54</a></p>
+<p>68、metaclass作用？以及应用场景？<br>69、用尽量多的方法实现单例模式。<br>70、装饰器的写法以及应用场景。<br>71、异常处理写法以及如何主动跑出异常（应用场景）<br>72、什么是面向对象的mro<br>73、isinstance作用以及应用场景？</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">一只柑</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://123.57.158.5/2020/08/27/Python%E9%9D%A2%E8%AF%95/">http://123.57.158.5/2020/08/27/Python%E9%9D%A2%E8%AF%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://123.57.158.5" target="_blank">‘一只柑の博客’</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E9%97%AE%E7%AD%94%E9%A2%98/">问答题</a></div><div class="post_share"><div class="social-share" data-image="http://cdn.rice-and-bran.site/python.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/"><img class="prev-cover" src="http://cdn.rice-and-bran.site/network.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络2之网络层</div></div></a></div><div class="next-post pull-right"><a href="/2020/08/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><img class="next-cover" src="http://cdn.rice-and-bran.site/network.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机网络1概述篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/21/python编程问答/" title="python编程问答基础篇1"><img class="cover" src="http://cdn.rice-and-bran.site/python.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-21</div><div class="title">python编程问答基础篇1</div></div></a></div><div><a href="/2020/07/29/Django安全及维护/" title="Django安全及维护————以积分商城为例"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-29</div><div class="title">Django安全及维护————以积分商城为例</div></div></a></div><div><a href="/2020/04/09/Django框架入门/" title="Django框架入门"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-09</div><div class="title">Django框架入门</div></div></a></div><div><a href="/2020/04/22/Django对象关系映射-ORM/" title="Django对象关系映射(ORM)"><img class="cover" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-22</div><div class="title">Django对象关系映射(ORM)</div></div></a></div><div><a href="/2020/05/11/Linux2/" title="操作系统（提升篇）"><img class="cover" src="http://cdn.rice-and-bran.site/Linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-11</div><div class="title">操作系统（提升篇）</div></div></a></div><div><a href="/2020/04/23/MySQL基本操作/" title="MySQL基本操作"><img class="cover" src="http://cdn.rice-and-bran.site/%E6%95%B0%E6%8D%AE%E5%BA%93.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-23</div><div class="title">MySQL基本操作</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">一只柑</div><div class="author-info__description">心中有海 不赶浪潮</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-def-func-a-b-%E8%BF%99%E7%A7%8D%E5%86%99%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%9D%91%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1.def func(a,b&#x3D;[]) 这种写法有什么坑？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-%E2%80%9C1-2-3%E2%80%9D-%E5%8F%98%E6%88%90-%E2%80%981%E2%80%99-%E2%80%992%E2%80%99-%E2%80%993%E2%80%99"><span class="toc-number">2.</span> <span class="toc-text">2.如何实现 “1,2,3” 变成 [‘1’,’2’,’3’] ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-%E2%80%981%E2%80%99-%E2%80%992%E2%80%99-%E2%80%993%E2%80%99-%E5%8F%98%E6%88%90-1-2-3"><span class="toc-number">3.</span> <span class="toc-text">3.如何实现[‘1’,’2’,’3’]变成[1,2,3] ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%AF%94%E8%BE%83%EF%BC%9Aa-1-2-3-%E5%92%8C-b-1-2-3-%E4%BB%A5%E5%8F%8A-c-1-2-3-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">4.比较：a &#x3D; [1,2,3] 和 b &#x3D; [(1),(2),(3) ] 以及 c &#x3D; [(1,),(2,),(3,) ] 的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%A6%82%E4%BD%95%E7%94%A8%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90-1-4-9-16-25-36-49-64-81-100"><span class="toc-number">5.</span> <span class="toc-text">5.如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E5%80%BC"><span class="toc-number">6.</span> <span class="toc-text">6.一行代码实现删除列表中重复的值 ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%A6%82%E4%BD%95%E5%9C%A8%E5%87%BD%E6%95%B0%E4%B8%AD%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">7.</span> <span class="toc-text">7.如何在函数中设置一个全局变量 ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-logging%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">8.logging模块的作用？以及应用场景？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E8%AF%B7%E7%94%A8%E4%BB%A3%E7%A0%81%E7%AE%80%E7%AD%94%E5%AE%9E%E7%8E%B0stack-%E3%80%82"><span class="toc-number">9.</span> <span class="toc-text">9.请用代码简答实现stack 。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%AE%80%E8%BF%B0-%E7%94%9F%E6%88%90%E5%99%A8%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1-%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">10.简述 生成器、迭代器、可迭代对象 以及应用场景？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%87%BD%E6%95%B0%E3%80%82"><span class="toc-number">11.</span> <span class="toc-text">11.用Python实现一个二分查找的函数。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="toc-number">12.</span> <span class="toc-text">12.谈谈你对闭包的理解？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-os%E5%92%8Csys%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">13.</span> <span class="toc-text">13.os和sys模块的作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">14.Python面向对象中的继承有什么特点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E5%92%8C%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">15.</span> <span class="toc-text">15.面向对象深度优先和广度优先是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E6%98%AF%E5%90%A6%E4%BD%BF%E7%94%A8%E8%BF%87functools%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9F%E5%85%B6%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">16.</span> <span class="toc-text">16.是否使用过functools中的函数？其作用是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-%E5%88%97%E4%B8%BE%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD%E5%B8%A6%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF%E7%9A%84%E7%89%B9%E6%AE%8A%E6%96%B9%E6%B3%95%EF%BC%8C%E5%A6%82%EF%BC%9A-new-%E3%80%81-init"><span class="toc-number">17.</span> <span class="toc-text">17.列举面向对象中带双下划线的特殊方法，如：__new__、__init__</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%98%AF%E5%87%BD%E6%95%B0%E8%BF%98%E6%98%AF%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">18.</span> <span class="toc-text">18.如何判断是函数还是方法？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">19.</span> <span class="toc-text">19.静态方法和类方法区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-%E5%88%97%E4%B8%BE%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">20.</span> <span class="toc-text">20.列举面向对象中的特殊成员以及应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-1%E3%80%812%E3%80%813%E3%80%814%E3%80%815-%E8%83%BD%E7%BB%84%E6%88%90%E5%A4%9A%E5%B0%91%E4%B8%AA%E4%BA%92%E4%B8%8D%E7%9B%B8%E5%90%8C%E4%B8%94%E6%97%A0%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%BD%8D%E6%95%B0"><span class="toc-number">21.</span> <span class="toc-text">21.1、2、3、4、5 能组成多少个互不相同且无重复的三位数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%EF%BC%9F%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-number">22.</span> <span class="toc-text">22. 什么是反射？以及应用场景？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/23/hello-world/" title="Hello World"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/05/23/hello-world/" title="Hello World">Hello World</a><time datetime="2021-05-23T02:34:37.977Z" title="发表于 2021-05-23 10:34:37">2021-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二叉树的一些性质及遍历"/></a><div class="content"><a class="title" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历">二叉树的一些性质及遍历</a><time datetime="2021-03-11T02:05:20.000Z" title="发表于 2021-03-11 10:05:20">2021-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装"><img src="http://cdn.rice-and-bran.site/Linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux文本编辑器及软件安装"/></a><div class="content"><a class="title" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装">Linux文本编辑器及软件安装</a><time datetime="2021-01-06T15:26:14.000Z" title="发表于 2021-01-06 23:26:14">2021-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络5之实践网络分析异步任务（更新中"/></a><div class="content"><a class="title" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中">计算机网络5之实践网络分析异步任务（更新中</a><time datetime="2020-12-30T16:43:42.000Z" title="发表于 2020-12-31 00:43:42">2020-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络4应用层"/></a><div class="content"><a class="title" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层">计算机网络4应用层</a><time datetime="2020-12-29T07:02:01.000Z" title="发表于 2020-12-29 15:02:01">2020-12-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 一只柑</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div></div></body></html>

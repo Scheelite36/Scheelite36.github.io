@@ -1,7 +1,333 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>‘一只柑の博客’</title><meta name="author" content="一只柑"><meta name="copyright" content="一只柑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="心中有海 不赶浪潮">
+<meta property="og:type" content="website">
+<meta property="og:title" content="‘一只柑の博客’">
+<meta property="og:url" content="http://123.57.158.5/page/5/index.html">
+<meta property="og:site_name" content="‘一只柑の博客’">
+<meta property="og:description" content="心中有海 不赶浪潮">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://123.57.158.5/img/avatar.png">
+<meta property="article:author" content="一只柑">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://123.57.158.5/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://123.57.158.5/page/5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '‘一只柑の博客’',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-06-07 13:23:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  include ./includes/mixins/post-ui.pug
-  #recent-posts.recent-posts
-    +postUI
-    include includes/pagination.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="‘一只柑の博客’" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('http://cdn.rice-and-bran.site/%E7%BD%91%E7%AB%99%E5%B0%81%E9%9D%A2.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">‘一只柑の博客’</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">‘一只柑の博客’</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/10/17/flask%E8%A1%A8%E5%8D%95%E4%BB%8B%E7%BB%8D/" title="flask表单介绍">     <img class="post_bg" src="http://cdn.rice-and-bran.site/flask.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="flask表单介绍"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/17/flask%E8%A1%A8%E5%8D%95%E4%BB%8B%E7%BB%8D/" title="flask表单介绍">flask表单介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-17T07:33:15.000Z" title="发表于 2020-10-17 15:33:15">2020-10-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Flask/">Flask</a></span></div><div class="content">wtf表单介绍特点：
+
+集成wtforms
+CSRF保护
+与Flask-Uploads一起支持文件上传
+
+安装：
+1pip install Flask-WTF
+
+配置（CSRF保护）：
+1app.config[&#x27;WTF_CSRF_SECRET_KEY&#x27;] = &#x27;a random string&#x27;
+
+第一个表单模型示例：
+123456from flask_wtf import FlaskFormfrom wtforms import StringFieldclass LoginForm(FlaskForm):    &quot;&quot;&quot; 用户名 &quot;&quot;&quot;    username = StringField(label=&#x27;用户名&#x27;)
+
+表单常用字段类型及渲染
+label——label标签（如输入框前的文字描述）
+default——表单的默认值
+validators——表单验证规则
+widget——定制界面显示方式（如：文本框、选择框）
+description——帮助文字（在Django表单 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/08/05/flask1/" title="Flask框架入门">     <img class="post_bg" src="http://cdn.rice-and-bran.site/flask.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Flask框架入门"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/08/05/flask1/" title="Flask框架入门">Flask框架入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-05T04:02:45.000Z" title="发表于 2020-08-05 12:02:45">2020-08-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Flask/">Flask</a></span></div><div class="content">Flask微框架认识FLaskPython实现的Web开发微框架，小而美，丰富的周边扩展
+1234mkvirtualenv flask	//创建虚拟环境pip install Flask	//安装falskworkon 虚拟环境名	//切换虚拟环境deactivate	//退出虚拟环境
+
+第一个Flask程序123456from flask import Flaskapp = Flask(__name__)@app.route(&#x27;/&#x27;)def hello_world():	return &#x27;hello_world&#x27;
+
+参数__name__解释：
+表示Flask应用的主模块或包的名称。Flask使用该参数确定应用的位置，然后找到应用中其他文件的位置，如网页中的图片位置，模块目录
+装饰器app.route():
+表示一个路由配置，即：用户在浏览器输入URL，使用对应的函数处理其中的业务逻辑
+MTV模型介绍模型（Model）
+
+Flask-PyMongo/Flask-MongoKit
+Flask-SQLAlchemy
+
+视图（View）
+
+Flask-W ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/10/03/flask-ORM/" title="Flask之ORM的介绍与项目实战">     <img class="post_bg" src="http://cdn.rice-and-bran.site/flask.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Flask之ORM的介绍与项目实战"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/03/flask-ORM/" title="Flask之ORM的介绍与项目实战">Flask之ORM的介绍与项目实战</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-03T12:27:12.000Z" title="发表于 2020-10-03 20:27:12">2020-10-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Flask/">Flask</a></span></div><div class="content">Flask ORM的介绍与项目实战
+Flask-SQLAlchemy介绍pip安装：
+1pip install Flask-SQLAlchemy
+
+源码安装：
+1python setup.py install
+
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/
+https://www.sqlalchemy.org/
+Flask-SQLAIchemy配置数据库URISQLALCHEMY_DATABASE_URI
+URI参数格式：Postgres:postgresql://username:password@127.0.0.1/mydatabaseMySQL:mysql://username:password@127.0.0.1/mydatabaseOracle:oracle://usernname:password@127.0.0.1/mydatabaseSQLite:sqlite:////absolute/path/to/foo.db
+多个数据库支持
+1234SQLALCHEMY_BINDS = &#123;&#x27;db1&# ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/12/28/First-Aid-Elementary-Course/" title="红会急救培训笔记">     <img class="post_bg" src="http://cdn.rice-and-bran.site/ICRC.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="红会急救培训笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/28/First-Aid-Elementary-Course/" title="红会急救培训笔记">红会急救培训笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-12-28T14:52:35.000Z" title="发表于 2020-12-28 22:52:35">2020-12-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></span></div><div class="content">前言半个月前我报名了北京红会的16学时急救课程，27，28号两天是培训时间，地点是在门头沟区的心田培训中心。主要学习内容是CPR（心肺复苏）、AED的使用、常见疾病处置、创伤处理等。对我来说是一次很有收获的体验，开这篇文章记录一下参加课程的笔记、心得。
+
+
+红十字会起源：亨利杜南目睹索尔费里诺战役后，成立伤兵救护委员会，后演变为日内瓦公约
+day1 徒手心肺复苏抢救生命的绿色通道“生存链”
+graph LR;
+	A[应急反应系统识别和启动]--&gt;B[高质量心肺复苏]
+	B--&gt;C[快速除颤]
+	C--&gt;D[基础及高级急救医疗服务]
+	D--&gt;E[高级生命维护和骤停后护理]
+
+救护员课程重点学习心肺复苏和除颤
+猝死：平素身体健康或貌似健康的患者，在出乎意料的短时间内，因自然疾病而突然死亡即为猝死。对于死亡时间，世卫组织定义从发病到死亡6小时内，一般认为1小时内死亡者多为心源性猝死。
+心肺复苏：指救护员在现场为心脏骤停患者实施胸外按压和人工呼吸。
+我国每年有约54万人死于心脏猝死，如果经过有效的心肺复苏，部分患者可存活。
+黄金四分钟：
+
+判断+救治步骤：
+
+环境安全 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/04/09/Django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8/" title="Django框架入门">     <img class="post_bg" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Django框架入门"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/09/Django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8/" title="Django框架入门">Django框架入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-09T01:57:11.000Z" title="发表于 2020-04-09 09:57:11">2020-04-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Django/">Django</a></span></div><div class="content">本文章是慕课网相关课程的学习笔记
+初始Django框架Django简介Django发展历程
+2003年 劳伦斯出版集团需要开发几个以新闻内容为主的网站，即是CMS（内容管理系统）软件，要快速响应，快速迭代开发。world online的三位工程师使用Python开发了Django。2005年开源，2008年发布1.0版本。
+
+Django介绍开源免费的Python高级web框架，内置电池，用于快速开发可靠、安全、可扩展的web应用。
+Django文档 https://docs.djangoproject.com
+MVT模型：Django开发的三个部分，模型（Model）视图（View）模板（Template）
+Django不断迭代更新，LTS（long-term support releases）支持
+网站开发流程
+选择合适的版本
+安装及配置
+生成项目结构
+内容开发
+迭代、上线、维护
+
+环境参数及配置安装Windows 10    MySQL8.0    Django2.2.12    pyhton3.7
+安装Django2.2.12版本
+1pip install django==2. ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/04/22/Django%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84-ORM/" title="Django对象关系映射(ORM)">     <img class="post_bg" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Django对象关系映射(ORM)"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/22/Django%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84-ORM/" title="Django对象关系映射(ORM)">Django对象关系映射(ORM)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-22T06:31:33.000Z" title="发表于 2020-04-22 14:31:33">2020-04-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Django/">Django</a></span></div><div class="content">本文是慕课网相关课程的学习笔记
+**ORM(Object Relational Mapping)**，对象关系映射
+ORM的重要特性：
+
+面向对象的编程思想，方便扩充
+少写SQL，提升开发效率
+支持多种类型的数据库，方便切换
+ORM技术成熟，能解决大部分问题
+
+ORM模型Django ORM配置示例：
+12345678910DATABASES = &#123;	&#x27;default&#x27;:&#123;        &#x27;ENGINE&#x27;:&#x27;django.db.backends.mysql&#x27;,        &#x27;NAME&#x27;:&#x27;mydatabase&#x27;,        &#x27;USER&#x27;:&#x27;mydatabase_user&#x27;,        &#x27;PASSWORD&#x27;:&#x27;mypassword&#x27;,        &#x27;HOST&#x27;:&#x27;127.0.0.1&#x27;,        &#x27;PORT&#x27;:&#x ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/07/29/Django%E5%AE%89%E5%85%A8%E5%8F%8A%E7%BB%B4%E6%8A%A4/" title="Django安全及维护————以积分商城为例">     <img class="post_bg" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Django安全及维护————以积分商城为例"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/07/29/Django%E5%AE%89%E5%85%A8%E5%8F%8A%E7%BB%B4%E6%8A%A4/" title="Django安全及维护————以积分商城为例">Django安全及维护————以积分商城为例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-29T10:42:41.000Z" title="发表于 2020-07-29 18:42:41">2020-07-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Django/">Django</a></span></div><div class="content">表单重复提交的问题思考：
+支付时，快速点击，多次提交会有什么问题？
+快速多次点击会多次提交表单。比如注册页面多次点击之后会提示已注册，对用户来说不太友好。
+CSRF（Cross-site request forgery）跨站请求伪造
+
+某些恶意网站上包含链接、表单提交按钮或者JavaScript，它们会利用登录过的用户在浏览器中的认证信息视图在你的网站上完成某些操作，这就是跨站请求伪造。
+跨站请求攻击，简单地说，是攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并运行一些操作（如发邮件，发消息，甚至财产操作如转账和购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了web中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。
+
+对于上面的表单重复提交问题，解决思路与应对csrf攻击类似。
+使用CSRF保护（针对同步提交，比如注册页面）
+在MIDDLEWARE设置中激活CSRF中间件
+django.middleware.csrf.CsrfViewMiddleware
+
+&lt ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/07/19/django%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="Django命令工具与中间件——以积分商城为例">     <img class="post_bg" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Django命令工具与中间件——以积分商城为例"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/07/19/django%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="Django命令工具与中间件——以积分商城为例">Django命令工具与中间件——以积分商城为例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-19T15:22:59.000Z" title="发表于 2020-07-19 23:22:59">2020-07-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Python/Django/">Django</a></span></div><div class="content">结合django积分商城项目食用 最佳
+思考以下场景的实现：
+
+向30天未登录的用户发送通知（邮件/短信）
+如何对Django进行扩展
+拦截非法请求
+如何快速高效的写接口、接入Webscoket等
+
+Django命令行工具介绍django内置命令介绍使用django命令行工具：
+django-admin（全局的）
+​    例如: django-admin startproject project_name
+python manage.py（在django根路径使用）
+​    manage.py会在每个Django项目中自动生成，二者命令相同，manage.py方便在项目中使用
+常用内置命令：
+1234567891011121314151617181920212223242526# 创建一个django项目（工程）django-admin startrproject name# 在项目中创建一个应用（app）python manage.py startapp name# 启动一个开发服务器python manage.py runserver# 启动开发服务器且自定义服务器地址，例如在 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/06/10/django-mooc-project2/" title="Django2.2实战积分商城2——表单的使用">     <img class="post_bg" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Django2.2实战积分商城2——表单的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/06/10/django-mooc-project2/" title="Django2.2实战积分商城2——表单的使用">Django2.2实战积分商城2——表单的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-10T01:57:58.000Z" title="发表于 2020-06-10 09:57:58">2020-06-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/">实战案例</a></span></div><div class="content">实现验证码实现验证码算法生成验证码：
+
+准备素材
+字体，文字内容，颜色，干扰线
+
+画验证码
+pip install Pillow
+创建图片，并记录文字内容 到session中
+
+Session：在计算机中，尤其是在网络应用中，称为“会话控制”。Session对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的Web页之间跳转时，存储在Session对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。当用户请求来自应用程序的 Web页时，如果该用户还没有会话，则Web服务器将自动创建一个 Session对象。当会话过期或被放弃后，服务器将终止该会话。
+
+
+Cookie，有时也用其复数形式 Cookies。类型为“小型文本文件”，是某些网站为了辨别用户身份，进行Session跟踪而储存在用户本地终端上的数据（通常经过加密），由用户客户端计算机暂时或永久保存的信息
+
+
+第一次请求，cookie + session 对应关系生成
+
+第二次请求，携带了cookie，找到对应的session[提交表单]
+请求带上验证码参数，与session中的验证码进行比较
+
+
+
+io文件流
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/05/12/django-mooc-project/" title="Django2.2实战积分商城1——创建ORM模型">     <img class="post_bg" src="http://cdn.rice-and-bran.site/Django_cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Django2.2实战积分商城1——创建ORM模型"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/12/django-mooc-project/" title="Django2.2实战积分商城1——创建ORM模型">Django2.2实战积分商城1——创建ORM模型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-12T07:55:09.000Z" title="发表于 2020-05-12 15:55:09">2020-05-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/">实战案例</a></span></div><div class="content">用Django来实战一个积分商城的项目
+项目准备阶段在我的Django框架入门 文章中，不再赘述
+设计模型设计模型添加系统轮播图和新闻及通知到数据库中，可以从数据库中调取数据后展现到首页
+1234567891011121314151617181920212223242526272829303132333435363738394041424344from django.db import modelsfrom system import constantsclass Slider(models.Model):    &quot;&quot;&quot; 系统轮播图 &quot;&quot;&quot;    name = models.CharField(&#x27;名称&#x27;, max_length=32)    desc = models.CharField(&#x27;描述&#x27;, max_length=256)    types = models.SmallIntegerField(&#x27;展示位置&#x27;, choices=constants.SLIDER_ ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">一只柑</div><div class="author-info__description">心中有海 不赶浪潮</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/23/hello-world/" title="Hello World"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/05/23/hello-world/" title="Hello World">Hello World</a><time datetime="2021-05-23T02:34:37.977Z" title="发表于 2021-05-23 10:34:37">2021-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二叉树的一些性质及遍历"/></a><div class="content"><a class="title" href="/2021/03/11/b-tree-traverse/" title="二叉树的一些性质及遍历">二叉树的一些性质及遍历</a><time datetime="2021-03-11T02:05:20.000Z" title="发表于 2021-03-11 10:05:20">2021-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装"><img src="http://cdn.rice-and-bran.site/Linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux文本编辑器及软件安装"/></a><div class="content"><a class="title" href="/2021/01/06/Linux%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E5%8F%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" title="Linux文本编辑器及软件安装">Linux文本编辑器及软件安装</a><time datetime="2021-01-06T15:26:14.000Z" title="发表于 2021-01-06 23:26:14">2021-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络5之实践网络分析异步任务（更新中"/></a><div class="content"><a class="title" href="/2020/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C5/" title="计算机网络5之实践网络分析异步任务（更新中">计算机网络5之实践网络分析异步任务（更新中</a><time datetime="2020-12-30T16:43:42.000Z" title="发表于 2020-12-31 00:43:42">2020-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层"><img src="http://cdn.rice-and-bran.site/network.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络4应用层"/></a><div class="content"><a class="title" href="/2020/12/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C4%E5%BA%94%E7%94%A8%E5%B1%82/" title="计算机网络4应用层">计算机网络4应用层</a><time datetime="2020-12-29T07:02:01.000Z" title="发表于 2020-12-29 15:02:01">2020-12-29</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HTML-CSS/"><span class="card-category-list-name">HTML/CSS</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JavaScript/"><span class="card-category-list-name">JavaScript</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JavaScript/jQuery/"><span class="card-category-list-name">jQuery</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">17</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/Django/"><span class="card-category-list-name">Django</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/Flask/"><span class="card-category-list-name">Flask</span><span class="card-category-list-count">4</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6/"><span class="card-category-list-name">地球化学</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/"><span class="card-category-list-name">实战案例</span><span class="card-category-list-count">5</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/AED/" style="font-size: 1.1em; color: #999">AED</a> <a href="/tags/AJAX/" style="font-size: 1.2em; color: #999da3">AJAX</a> <a href="/tags/CPR/" style="font-size: 1.1em; color: #999">CPR</a> <a href="/tags/CSS/" style="font-size: 1.35em; color: #99a3b1">CSS</a> <a href="/tags/Django/" style="font-size: 1.45em; color: #99a7ba">Django</a> <a href="/tags/Excel/" style="font-size: 1.1em; color: #999">Excel</a> <a href="/tags/Flask/" style="font-size: 1.25em; color: #999fa7">Flask</a> <a href="/tags/HTML/" style="font-size: 1.4em; color: #99a5b6">HTML</a> <a href="/tags/JQuery/" style="font-size: 1.15em; color: #999b9e">JQuery</a> <a href="/tags/JavaScript/" style="font-size: 1.4em; color: #99a5b6">JavaScript</a> <a href="/tags/Jinja2/" style="font-size: 1.2em; color: #999da3">Jinja2</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/Linux/" style="font-size: 1.3em; color: #99a1ac">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Nano/" style="font-size: 1.1em; color: #999">Nano</a> <a href="/tags/Nginx/" style="font-size: 1.15em; color: #999b9e">Nginx</a> <a href="/tags/PowerShell/" style="font-size: 1.1em; color: #999">PowerShell</a> <a href="/tags/Python/" style="font-size: 1.5em; color: #99a9bf">Python</a> <a href="/tags/RTFM/" style="font-size: 1.1em; color: #999">RTFM</a> <a href="/tags/SQLAlchemy/" style="font-size: 1.15em; color: #999b9e">SQLAlchemy</a> <a href="/tags/SSL%E8%AF%81%E4%B9%A6/" style="font-size: 1.1em; color: #999">SSL证书</a> <a href="/tags/Terminal/" style="font-size: 1.15em; color: #999b9e">Terminal</a> <a href="/tags/Typora/" style="font-size: 1.1em; color: #999">Typora</a> <a href="/tags/Ubuntu/" style="font-size: 1.15em; color: #999b9e">Ubuntu</a> <a href="/tags/github/" style="font-size: 1.1em; color: #999">github</a> <a href="/tags/hexo/" style="font-size: 1.2em; color: #999da3">hexo</a> <a href="/tags/jQuery/" style="font-size: 1.1em; color: #999">jQuery</a> <a href="/tags/openpyxl/" style="font-size: 1.1em; color: #999">openpyxl</a> <a href="/tags/ssh/" style="font-size: 1.1em; color: #999">ssh</a> <a href="/tags/%E4%B8%BB%E9%87%8F%E5%85%83%E7%B4%A0/" style="font-size: 1.1em; color: #999">主量元素</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 1.1em; color: #999">二叉树</a> <a href="/tags/%E5%9C%B0%E7%90%83%E5%8C%96%E5%AD%A6/" style="font-size: 1.15em; color: #999b9e">地球化学</a> <a href="/tags/%E5%9F%BA%E9%87%91%E5%AE%9A%E6%8A%95/" style="font-size: 1.1em; color: #999">基金定投</a> <a href="/tags/%E5%AE%9E%E6%88%98/" style="font-size: 1.4em; color: #99a5b6">实战</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 1.1em; color: #999">异步</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">排序算法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.3em; color: #99a1ac">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.1em; color: #999">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">数据结构与算法</a> <a href="/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">查找算法</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">一月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">58</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-06-07T05:23:19.141Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 一只柑</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "For what it\'s worth&#44; it\'s never too late.,There is no time limit&#44; start whenever you want.".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = 'For what it\'s worth&#44; it\'s never too late.'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div></div></body></html>

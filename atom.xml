@@ -6,7 +6,7 @@
   <link href="http://123.57.158.5/atom.xml" rel="self"/>
   
   <link href="http://123.57.158.5/"/>
-  <updated>2021-06-09T14:53:22.110Z</updated>
+  <updated>2021-06-23T17:17:29.597Z</updated>
   <id>http://123.57.158.5/</id>
   
   <author>
@@ -17,15 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://123.57.158.5/2021/06/09/%E6%9C%AA%E5%91%BD%E5%90%8D/"/>
-    <id>http://123.57.158.5/2021/06/09/%E6%9C%AA%E5%91%BD%E5%90%8D/</id>
-    <published>2021-06-09T14:53:22.110Z</published>
-    <updated>2021-06-09T14:53:22.110Z</updated>
+    <title>postman_test</title>
+    <link href="http://123.57.158.5/2021/06/23/postman-test/"/>
+    <id>http://123.57.158.5/2021/06/23/postman-test/</id>
+    <published>2021-06-22T16:19:20.000Z</published>
+    <updated>2021-06-23T17:17:29.597Z</updated>
+    
+    <content type="html"><![CDATA[<p>接口测试流程：</p><ol><li><p>获取接口信息</p><p>通过接口文档和抓包获取接口基本调用方式和返回</p></li><li><p>接口测试用例设计</p><p>根据获取到的接口信息，按照接口测试用例设计方法，设计参数和预期返回结果</p></li><li><p>接口发包</p><p>使用工具或者编程想接口传递参数</p></li><li><p>返回信息验证</p><p>获取接口返回的结果，进行解析和验证</p></li></ol><p>接口测试用例的设计：</p><p>以高德地图的一个get请求的ip查询请求地址为例，在postman中新建一个get请求，将抓包到的request url添加进去，可以测试接口的各项功能。例如改变参数后接口是否正常使用，例如各个参数是否必填。</p><p><img src="/2021/06/23/postman-test/image-20210624004047302.png" alt="image-20210624004047302"></p><p>当不勾选key参数后：</p><p><img src="/2021/06/23/postman-test/image-20210624004406045.png" alt="image-20210624004406045"></p><p>当填写错误的ip地址：</p><p><img src="/2021/06/23/postman-test/image-20210624004335989.png" alt="image-20210624004335989"></p><p>可以验证该get接口是否符合设计需求。</p><p>可以在ip地址参数中按照<strong>等价类</strong>及<strong>边界值</strong>法进行测试</p><p>在postman发送请求过程中，已经默默带上了请求头（request headers）信息，如果是在浏览器中也会带有</p><p><img src="/2021/06/23/postman-test/image-20210624010413171.png" alt="image-20210624010413171"></p><h2 id="接口收发包过程"><a href="#接口收发包过程" class="headerlink" title="接口收发包过程"></a>接口收发包过程</h2><p>postman接口请求过程：</p><p>获取地址（URL）——设置http方法（GET POST等）——设置请求头域（request headers）——填写请求参数</p><p>postman接口响应验证：</p><p>http状态码——收到接口响应——检查返回头域（response headers）——查看返回主体内容</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;接口测试流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;获取接口信息&lt;/p&gt;
+&lt;p&gt;通过接口文档和抓包获取接口基本调用方式和返回&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;接口测试用例设计&lt;/p&gt;
+&lt;p&gt;根据获取到的接口信息，按照接口测试用例设计方法，设计参数和预期返回结果&lt;/p&gt;
+&lt;/l</summary>
+      
     
     
     
     
+    <category term="Postman" scheme="http://123.57.158.5/tags/Postman/"/>
+    
+    <category term="接口测试" scheme="http://123.57.158.5/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   

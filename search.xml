@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>IDEA下新建Servlet项目与Tomcat10不兼容问题</title>
+      <link href="/2021/08/03/servlet-tomcat-problem/"/>
+      <url>/2021/08/03/servlet-tomcat-problem/</url>
+      
+        <content type="html"><![CDATA[<p>最近在学习java后端，在使用IDEA新建Servlet+Tomcat项目的时候，碰到了问题。tomcat是通过<code>brew install tomcat</code>安装的。启动项目后可以看到首页内容，但是首页出现的所有超链接页面全部报错404。</p><p>花了一个晚上没查明白，第二天切换为了tomcat@9的最新版，就解决了！太离谱了</p><p><code>brew install tomcat</code>安装的是最新版Tomcat10最新版，但是可能是与Servlet不兼容。后使用<code>brew install tomact@9</code>安装了9的最新版9.0.46，然后将其添加到idea的tomcat路径中</p><p><img src="/2021/08/03/servlet-tomcat-problem/image-20210803225349780.png" alt="image-20210803225349780"></p><p><img src="/2021/08/03/servlet-tomcat-problem/image-20210803225439855.png" alt="image-20210803225439855"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Servlet </tag>
+            
+            <tag> Tomcat </tag>
+            
+            <tag> IDEA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java部分学习笔记3（接口、继承、多态到异常处理）</title>
       <link href="/2021/07/14/java3/"/>
       <url>/2021/07/14/java3/</url>

@@ -4,7 +4,34 @@
   
     
     <entry>
-      <title>java_stream</title>
+      <title>由@Valid注解校验引发的问题之Integer与int的比较</title>
+      <link href="/2021/10/10/java-lang/"/>
+      <url>/2021/10/10/java-lang/</url>
+      
+        <content type="html"><![CDATA[<p>最近在学习spring boot过程中遇到的一个问题</p><p>我在一个请求体model中将需要校验的字段写成了这样</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpdateCategoryReq</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull(message = &quot;商品分类id不能为空&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure><p>同时在controller中对该请求体进行了@Valid校验，最后发现，<strong>校验没有生效</strong>，且自动对id进行了填充（？？？）。最后发现@Valid校验本质是校验java.lang中的包装类</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.METHOD, ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Valid &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>而定义变量时候，int类型不允许为空，而integer是可以为null。所以请求体中会对id自动赋值为0。</p><p>所以需要将字段改为包装类定义，才能进行校验。</p><p>扩展 Integer与int的区别：</p><blockquote><p>1、Integer是int的包装类，int则是java的一种基本数据类型<br>2、Integer变量必须实例化后才能使用，而int变量不需要<br>3、Integer实际是对象的引用，当new一个Integer时，实际上是生成一个指针指向此对象；而int则是直接存储数据值<br>4、Integer的默认值是null，int的默认值是0</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java流处理</title>
       <link href="/2021/10/06/java-stream/"/>
       <url>/2021/10/06/java-stream/</url>
       

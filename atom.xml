@@ -6,7 +6,7 @@
   <link href="http://123.57.158.5/atom.xml" rel="self"/>
   
   <link href="http://123.57.158.5/"/>
-  <updated>2021-12-12T16:24:18.103Z</updated>
+  <updated>2021-12-13T15:56:19.104Z</updated>
   <id>http://123.57.158.5/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java判定2的方幂和2方幂取法</title>
+    <link href="http://123.57.158.5/2021/12/13/java-power2/"/>
+    <id>http://123.57.158.5/2021/12/13/java-power2/</id>
+    <published>2021-12-13T14:02:18.000Z</published>
+    <updated>2021-12-13T15:56:19.104Z</updated>
+    
+    <content type="html"><![CDATA[<p>判断是不是2的方幂可以通过按位与是否等于0来判定，很容易可以推出。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">isPowerOf2</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (n &amp; (n-<span class="number">1</span>)) == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>对于一个数获取包含它在内的最近额2的方幂：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// numberOfLeadingZeros就是1前面0的个数，int总位数这里是32</span></span><br><span class="line">  <span class="comment">// 负数的非符号位在计算机中就是它对应正数的补码（反码加一）</span></span><br><span class="line">  <span class="comment">// &gt;&gt;&gt;是忽略符号位右移（左边直接补0）</span></span><br><span class="line">    <span class="keyword">int</span> n = -<span class="number">1</span> &gt;&gt;&gt; Integer.numberOfLeadingZeros(cap - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : n + <span class="number">1</span>;</span><br></pre></td></tr></table></figure><p>例如 输入值为 9 我们来找方幂，为了方便观看假定int为8位。</p><p>8二进制为00001000 numberOfLeadingZeros方法返回4，-1非符号位补码表示为11111111右移4位，填充0，00001111</p><p>所以n = 15 最终返回16，即要找的2方幂</p><p>对于numberOfLeadingZeros方法源码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个处理逻辑很符合二分搜索树。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">numberOfLeadingZeros</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// HD, Figure 5-6</span></span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">32</span>;</span><br><span class="line">        <span class="comment">// 为什么是1呢？因为如果i不是0，那么就表明在二进制表示中其至少有一位为1。</span></span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 如果 i 无符号右移 16位成立，那么就表示i的前16为0，这是就可以对n进行+16(32-16)的操作，然后</span></span><br><span class="line">        <span class="comment">// 再将i左移16位，这个主要是将低位的数值移到高位去进行处理 </span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">16</span> == <span class="number">0</span>) &#123; n += <span class="number">16</span>; i &lt;&lt;= <span class="number">16</span>; &#125;</span><br><span class="line">        <span class="comment">// 如果 i 无符号右移 24位成立，那么就表示前24位为0，这时就可以对n进行+8操作(加8操作的来源是：</span></span><br><span class="line">        <span class="comment">// 32 - 24 得来的)，接着将i左移8位，这样就把24位的0覆盖掉，将低位数字移到高位来进行处理</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">24</span> == <span class="number">0</span>) &#123; n +=  <span class="number">8</span>; i &lt;&lt;=  <span class="number">8</span>; &#125;</span><br><span class="line">        <span class="comment">// 一样的逻辑来进行处理（加4的来源是：32-28）</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">28</span> == <span class="number">0</span>) &#123; n +=  <span class="number">4</span>; i &lt;&lt;=  <span class="number">4</span>; &#125;</span><br><span class="line">        <span class="comment">// 一样的逻辑（加2的来源是：32-30）</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">30</span> == <span class="number">0</span>) &#123; n +=  <span class="number">2</span>; i &lt;&lt;=  <span class="number">2</span>; &#125;</span><br><span class="line">       </span><br><span class="line">        n -= i &gt;&gt;&gt; <span class="number">31</span>;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;判断是不是2的方幂可以通过按位与是否等于0来判定，很容易可以推出。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;s</summary>
+      
+    
+    
+    
+    
+    <category term="Java" scheme="http://123.57.158.5/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java实现pythonzip方法</title>
@@ -546,32 +569,6 @@
     
     
     <category term="计算机网络" scheme="http://123.57.158.5/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>红会急救培训笔记</title>
-    <link href="http://123.57.158.5/2020/12/28/First-Aid-Elementary-Course/"/>
-    <id>http://123.57.158.5/2020/12/28/First-Aid-Elementary-Course/</id>
-    <published>2020-12-28T14:52:35.000Z</published>
-    <updated>2021-05-23T02:34:37.749Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>半个月前我报名了北京红会的16学时急救课程，27，28号两天是培训时间，地点是在门头沟区的心田培训中心。主要学习内容是CPR（心肺复苏）、AED的使用、常见疾病处置、创伤处理等。对我来说是一次很有收获的体验，开这篇文章记录一下参加课程的笔记、心得。</p><img src="/2020/12/28/First-Aid-Elementary-Course/11c0950fb47eebdb.jpeg" alt="11c0950fb47eebdb" style="zoom:67%;"><p><strong>红十字会起源</strong>：亨利杜南目睹索尔费里诺战役后，成立伤兵救护委员会，后演变为日内瓦公约</p><h2 id="day1-徒手心肺复苏"><a href="#day1-徒手心肺复苏" class="headerlink" title="day1 徒手心肺复苏"></a>day1 徒手心肺复苏</h2><p>抢救生命的绿色通道“生存链”</p><div class="mermaid">graph LR;A[应急反应系统识别和启动]--&gt;B[高质量心肺复苏]B--&gt;C[快速除颤]C--&gt;D[基础及高级急救医疗服务]D--&gt;E[高级生命维护和骤停后护理]</div><p>救护员课程重点学习心肺复苏和除颤</p><p><strong>猝死</strong>：平素身体健康或貌似健康的患者，在出乎意料的短时间内，因自然疾病而突然死亡即为猝死。对于死亡时间，世卫组织定义从发病到死亡6小时内，一般认为1小时内死亡者多为心源性猝死。</p><p><strong>心肺复苏</strong>：指救护员在现场为心脏骤停患者实施胸外按压和人工呼吸。</p><p>我国每年有约54万人死于心脏猝死，如果经过有效的心肺复苏，部分患者可存活。</p><p>黄金四分钟：</p><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229005456937.png" alt="image-20201229005456937"></p><p>判断+救治步骤：</p><ol><li><p>环境安全，做好防护。</p></li><li><p>轻拍患者双肩，呼喊（“先生先生，您怎么了？”），确认有无意识。解开衣服，仔细观察呼吸（1001-1007），确认有无呼吸（或仅仅是喘息）</p></li><li><p>无呼吸无意识，大声呼叫，让人帮忙拨打120，取AED。表明救护员身份并寻求援助。</p></li><li><p>立即进入<strong>心肺复苏</strong>程序，C-A-B。（如果是溺水则是A-B-C，要先保持气道畅通）</p><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229005703564.png" alt="image-20201229005703564"></p><blockquote><p>心肺复苏CAB分别代表:1.C: circulation循环，即要求胸外按压，保证心脏射血，体内血液循环。2.A: airway气道，即要求保持气道通畅，要注意清理口腔呕吐物，采取仰颌抬颏法使呼吸顺畅。3.B: breathing呼吸，即口对口人工呼吸，每一次吹气要看到胸廓有起伏，但也不要用力过猛。保证氧气输送到肺组织。</p></blockquote><p>心肺复苏注意事项：</p><ul><li><p>按压位置位于两乳头连线中点的胸骨处，双手十指相扣，掌根对着胸骨，手臂不弯曲，使用上半身力量，髋关节为轴。</p></li><li><p>按压深度约5-6cm（一般胸骨到背部厚度三分之一）</p></li><li><p>每分钟100~120次</p><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229005818116.png" alt="image-20201229005818116"></p></li><li><p>按压时时刻注意患者头部，有反应则停止并判断情况。</p></li><li><p>医生没到/病人没醒按压不能停！！！！ （人工呼吸、使用AED除外）</p></li><li><p>人工呼吸前检查气道，口腔无异物，仰额抬颏法。嘴包嘴吹气，持续1秒</p><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229005855463.png" alt="image-20201229005855463"></p></li><li><p>吹压比/吹气比：<strong>30：2</strong>（30次按压，两次人工呼吸）。<font color="red">持续五个周期的30：2的心肺复苏</font>，再检查患者反应和呼吸（脖子动脉）</p></li></ul></li><li><p>AED抵达后，立即开机，将电极贴对应身体裸露位置，右边锁骨下面，一处左边乳房下面。前胸后背也可以。</p></li><li><p>按照AED提示除颤，随后根据自己节奏30：2心肺复苏。</p></li><li><p>呼吸心跳恢复后，调整侧卧位</p></li></ol><p><img src="/2020/12/28/First-Aid-Elementary-Course/watermark,image_d2F0ZXIvYmFpa2U5Mg==,g_7,xp_5,yp_5" alt="img"></p><p>心肺复苏成功的标志：恢复自主心跳自主呼吸及意识</p><p>可参考表现：眼球活动、睫毛放射、四肢活动；瞳孔扩大逐渐缩回变小；有知觉、反应、脸色转红等</p><blockquote><p>自动体外除颤器又称自动体外电击器、自动电击器、自动除颤器、心脏除颤器及傻瓜电击器等，是一种便携式的医疗设备，它可以诊断特定的心率失常，并且给予电击<a href="https://baike.baidu.com/item/%E9%99%A4%E9%A2%A4/3310526">除颤</a>，是可被非专业人员使用的用于抢救心脏骤停患者的医疗设备。在心跳骤停时，只有在最佳抢救时间的“黄金4分钟”内，利用自动体外除颤器（AED）对患者进行除颤和心肺复苏，才是最有效制止猝死的办法。</p></blockquote><p><strong>异物阻塞处置</strong>：</p><p>腹部冲击法（海姆立克法）冲击患者腹部，使横膈肌急速提升，呼吸道压力骤升，异物排出。（极端场景才使用，因为可能造成脏器损伤，一般拍拍背就行）</p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229010943066.png" alt="image-20201229010943066" style="zoom:50%;"><p>问题及其他病情处置：</p><ol><li>隔着薄衣服可以做心肺复苏吗？可以，但要保证按压高质量。</li><li>有呼吸无意识怎么处置？恢复安全体位即可</li><li>癫痫发作怎么处置？腾出空间，让其自我恢复，不做处理</li><li>患者倒地后判断呼吸要通过身体起伏而不是脉搏？1）脉搏非专业人士判断不准 2）判断呼吸没有，心跳一定是停止的，因为心跳停止后呼吸才停。</li></ol><h2 id="day2-创伤现场救治"><a href="#day2-创伤现场救治" class="headerlink" title="day2 创伤现场救治"></a>day2 创伤现场救治</h2><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229014414580.png" alt="image-20201229014414580"></p><p>流血包扎原则：</p><ul><li><p>包扎前上敷料，从远心端–&gt;近心端（毒蛇咬伤则相反）包扎。手臂包扎使用螺旋包扎法，手背手心使用八字包扎法，关节包扎使用人字形包。胸部、腹部用三角巾包扎。</p><p><em>图为胸部包扎处理</em></p><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229014508145.png" alt="image-20201229014508145"></p></li><li><p>包扎结束再外侧（大拇指那边一侧）</p></li><li><p>包扎时候绷带朝上拿</p></li><li><p>包扎完检查末端血液循环（比如按压指尖）</p></li><li><p>使用三角巾悬挂</p></li></ul><p>骨折处理：</p><ul><li>伤侧房足够的软垫、如果是开放骨折不能清理，只制动不复位</li><li>使用三角巾悬挂</li><li>加制动带</li></ul><p>三角巾悬挂原则：</p><p>如果是上臂、前臂受伤使用大悬臂带，如果是肢末端（手，锁骨）使用三角叫悬臂带</p><p><em>图为大悬臂带</em></p><p><img src="/2020/12/28/First-Aid-Elementary-Course/image-20201229014614803.png" alt="image-20201229014614803"></p><p>具体其他的包扎 悬挂方法建议看视频复习巩固。细节不好文字描述。</p><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这两天真的有点高强度，尤其基地位于门头沟，往返三小时多，回宿舍就累趴了。（ps：第一次做门头沟S1线，培训小伙伴告知我是磁悬浮的，怪不得很舒适平稳。沿途景色不错）</p><p>笔记到这里就结束了，这次课程收获满满，确实学到了很多急救的干货，最重要的是当家人朋友出现紧急状况就知道该怎么做了。如果路遇紧急情况我应该也能尽一份力。</p><p>感谢红会的老师们，真的很耐心很温暖很细心！！！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;半个月前我报名了北京红会的16学时急救课程，27，28号两天是培训时间，地点是在门头沟区的心田培训中心。主要学习内容是CPR（心肺复苏）、A</summary>
-      
-    
-    
-    
-    <category term="生活" scheme="http://123.57.158.5/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="CPR" scheme="http://123.57.158.5/tags/CPR/"/>
-    
-    <category term="AED" scheme="http://123.57.158.5/tags/AED/"/>
     
   </entry>
   

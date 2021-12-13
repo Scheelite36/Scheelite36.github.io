@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Java判定2的方幂和2方幂取法</title>
+      <link href="/2021/12/13/java-power2/"/>
+      <url>/2021/12/13/java-power2/</url>
+      
+        <content type="html"><![CDATA[<p>判断是不是2的方幂可以通过按位与是否等于0来判定，很容易可以推出。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">isPowerOf2</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (n &amp; (n-<span class="number">1</span>)) == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>对于一个数获取包含它在内的最近额2的方幂：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// numberOfLeadingZeros就是1前面0的个数，int总位数这里是32</span></span><br><span class="line">  <span class="comment">// 负数的非符号位在计算机中就是它对应正数的补码（反码加一）</span></span><br><span class="line">  <span class="comment">// &gt;&gt;&gt;是忽略符号位右移（左边直接补0）</span></span><br><span class="line">    <span class="keyword">int</span> n = -<span class="number">1</span> &gt;&gt;&gt; Integer.numberOfLeadingZeros(cap - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : n + <span class="number">1</span>;</span><br></pre></td></tr></table></figure><p>例如 输入值为 9 我们来找方幂，为了方便观看假定int为8位。</p><p>8二进制为00001000 numberOfLeadingZeros方法返回4，-1非符号位补码表示为11111111右移4位，填充0，00001111</p><p>所以n = 15 最终返回16，即要找的2方幂</p><p>对于numberOfLeadingZeros方法源码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个处理逻辑很符合二分搜索树。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">numberOfLeadingZeros</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// HD, Figure 5-6</span></span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">32</span>;</span><br><span class="line">        <span class="comment">// 为什么是1呢？因为如果i不是0，那么就表明在二进制表示中其至少有一位为1。</span></span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 如果 i 无符号右移 16位成立，那么就表示i的前16为0，这是就可以对n进行+16(32-16)的操作，然后</span></span><br><span class="line">        <span class="comment">// 再将i左移16位，这个主要是将低位的数值移到高位去进行处理 </span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">16</span> == <span class="number">0</span>) &#123; n += <span class="number">16</span>; i &lt;&lt;= <span class="number">16</span>; &#125;</span><br><span class="line">        <span class="comment">// 如果 i 无符号右移 24位成立，那么就表示前24位为0，这时就可以对n进行+8操作(加8操作的来源是：</span></span><br><span class="line">        <span class="comment">// 32 - 24 得来的)，接着将i左移8位，这样就把24位的0覆盖掉，将低位数字移到高位来进行处理</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">24</span> == <span class="number">0</span>) &#123; n +=  <span class="number">8</span>; i &lt;&lt;=  <span class="number">8</span>; &#125;</span><br><span class="line">        <span class="comment">// 一样的逻辑来进行处理（加4的来源是：32-28）</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">28</span> == <span class="number">0</span>) &#123; n +=  <span class="number">4</span>; i &lt;&lt;=  <span class="number">4</span>; &#125;</span><br><span class="line">        <span class="comment">// 一样的逻辑（加2的来源是：32-30）</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;&gt;&gt; <span class="number">30</span> == <span class="number">0</span>) &#123; n +=  <span class="number">2</span>; i &lt;&lt;=  <span class="number">2</span>; &#125;</span><br><span class="line">       </span><br><span class="line">        n -= i &gt;&gt;&gt; <span class="number">31</span>;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java实现pythonzip方法</title>
       <link href="/2021/12/12/java-zip-function/"/>
       <url>/2021/12/12/java-zip-function/</url>
@@ -935,9 +954,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -991,9 +1010,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -1020,9 +1039,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -1047,9 +1066,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
             <tag> 实战 </tag>
             
@@ -1111,9 +1130,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -1163,9 +1182,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
             <tag> 实战 </tag>
             
@@ -1285,9 +1304,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -1337,9 +1356,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
             <tag> 实战 </tag>
             
@@ -1501,9 +1520,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -1559,9 +1578,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Django </tag>
+            
+            <tag> Python </tag>
             
             <tag> 实战 </tag>
             

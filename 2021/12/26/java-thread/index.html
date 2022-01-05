@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>java基础知识补充 | 一只柑の博客</title><meta name="keywords" content="Java"><meta name="author" content="一只柑"><meta name="copyright" content="一只柑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="创建线程的方法 创建继承Thread类的方法，重写run方法；  123456789class MyThread extends Thread&amp;#123;		public void run()&amp;#123;				xxxx;				System.out.println(getName());		&amp;#125;&amp;#125;MyThread thread &#x3D; new MyThread();thread">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础知识补充">
+<meta property="og:url" content="http://123.57.158.5/2021/12/26/java-thread/index.html">
+<meta property="og:site_name" content="一只柑の博客">
+<meta property="og:description" content="创建线程的方法 创建继承Thread类的方法，重写run方法；  123456789class MyThread extends Thread&amp;#123;		public void run()&amp;#123;				xxxx;				System.out.println(getName());		&amp;#125;&amp;#125;MyThread thread &#x3D; new MyThread();thread">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.rice-and-bran.site/java_cover.jpg">
+<meta property="article:published_time" content="2021-12-26T15:26:12.000Z">
+<meta property="article:modified_time" content="2022-01-04T16:53:53.335Z">
+<meta property="article:author" content="一只柑">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.rice-and-bran.site/java_cover.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://123.57.158.5/2021/12/26/java-thread/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'java基础知识补充',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-05 00:53:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="一只柑の博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://cdn.rice-and-bran.site/java_cover.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">一只柑の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">java基础知识补充</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-26T15:26:12.000Z" title="发表于 2021-12-26 23:26:12">2021-12-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:53:53.335Z" title="更新于 2022-01-05 00:53:53">2022-01-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><img src="/2021/12/26/java-thread/image-20211226233842837.png" alt="image-20211226233842837" style="zoom:50%;">
+
+<h3 id="创建线程的方法"><a href="#创建线程的方法" class="headerlink" title="创建线程的方法"></a>创建线程的方法</h3><ol>
+<li>创建继承Thread类的方法，重写run方法；</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">				xxxx;</span><br><span class="line">				System.out.println(getName());</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyThread thread = <span class="keyword">new</span> MyThread();</span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>实现runnable接口方法</li>
+</ol>
+<p>应该java不支持多继承；同时也不打算重写Thread类其他方法时候可以使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">				xxx;</span><br><span class="line">				System.out.println(Thread.currentThread.getName());</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyRunnable run = <span class="keyword">new</span> MyRunnable();</span><br><span class="line">Thread thread = <span class="keyword">new</span> Thread(run);</span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程的几个主要方法"><a href="#线程的几个主要方法" class="headerlink" title="线程的几个主要方法"></a>线程的几个主要方法</h3><p><code>sleep()</code>和<code>yield()</code>都是线程类的静态方法，<code>join()</code>是线程对象的调用方法</p>
+<p><code>wait()</code>、<code>notify()</code>、<code>notifyAll()</code>这三个都是Object对象方法，用于协调多个线程对共享数据的读取。</p>
+<p>它们都是用于协调多个线程对共享数据的存取，所以必须在Synchronized语句块内使用这三个方法。Synchronized这个关键字用于保护共享数据，阻止其他线程对共享数据的存取。但是这样程序的流程就很不灵活了，如何才能在当前线程还没退出Synchronized数据块时让其他线程也有机会访问共享数据呢？此时就用这三个方法来灵活控制。 </p>
+<p>(1) wait()方法使当前线程暂停执行并<strong>释放对象锁</strong>标志，让其他线程可以进入Synchronized数据块，当前线程被放入对象等待池中。</p>
+<p>(2) 当调用 notify()方法后，将从对象的等待池中移走一个任意的线程并放到锁标志等待池中，只有锁标志等待池中的线程能够获取锁标志；如果锁标志等待池中没有线程，则notify()不起作用。<br>(3) notifyAll()则从对象等待池中移走所有等待那个对象的线程并放到锁标志等待池中</p>
+<p><code>sleep()</code>释放cpu资源，不释放锁资源了；<code>wait()</code>释放cpu资源和锁资源</p>
+<p>1.sleep：Thread类的方法，必须带一个时间参数。<strong>会让当前线程休眠进入阻塞状态并释放CPU（阿里面试题 Sleep释放CPU，wait 也会释放cpu，因为cpu资源太宝贵了，只有在线程running的时候，才会获取cpu片段）</strong>，提供其他线程运行的机会且不考虑优先级，但如果有同步锁则sleep不会释放锁即其他线程无法获得同步锁 可通过调用interrupt()方法来唤醒休眠线程。</p>
+<p>2.yield：<strong>让出CPU调度</strong>，Thread类的方法，类似sleep只是<strong>不能由用户指定暂停多长时间 ，</strong>并且yield()方法<strong>只能让同优先级的线程</strong>有执行的机会。 yield()只是使当前线程重新回到可执行状态，所以执行yield()的线程有可能在进入<strong>到可执行状态后</strong>马上又被执行。调用yield方法只是一个建议，告诉线程调度器我的工作已经做的差不多了，可以让别的相同优先级的线程使用CPU了，没有任何机制保证采纳。</p>
+<p>3.wait：Object类的方法(notify()、notifyAll()  也是Object对象)，必须放在循环体和同步代码块中，执行该方法的线程会释放锁，进入线程等待池中等待被再次唤醒 (notify随机唤醒，notifyAll全部唤醒，线程结束自动唤醒) 即放入锁池中竞争同步锁 </p>
+<p>4.join：一种特殊的wait，当前运行线程调用另一个线程的join方法，当前线程进入阻塞状态直到另一个线程运行结束等待该线程终止。 注意该方法也需要捕捉异常。</p>
+<p>等待调用join方法的线程结束，再继续执行。如：t.join();//主要用于等待t线程运行结束，若无此句，main则会执行完毕，导致结果不可预测。</p>
+<h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><p>sychronized关键字 可用于成员方法、静态方法、语句块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">svaeAccount</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">saveAccount</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="keyword">synchronized</span>(obj)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于线程相关方法的使用参见github上关于线程的学习代码</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">一只柑</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://123.57.158.5/2021/12/26/java-thread/">http://123.57.158.5/2021/12/26/java-thread/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://123.57.158.5" target="_blank">一只柑の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="http://cdn.rice-and-bran.site/java_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/12/29/kmp-next-list/"><img class="prev-cover" src="/img/psb.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">KMP算法之next数组代码理解</div></div></a></div><div class="next-post pull-right"><a href="/2021/12/21/java-thread-pool/"><img class="next-cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java线程池解析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/08/30/aop-round-advice/" title="AOP环绕通知"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-30</div><div class="title">AOP环绕通知</div></div></a></div><div><a href="/2021/10/10/java-lang/" title="由@Valid注解校验引发的问题之Integer与int的比较"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-10</div><div class="title">由@Valid注解校验引发的问题之Integer与int的比较</div></div></a></div><div><a href="/2021/12/13/java-power2/" title="Java判定2的方幂和2方幂取法"><img class="cover" src="/img/psb.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-13</div><div class="title">Java判定2的方幂和2方幂取法</div></div></a></div><div><a href="/2021/12/21/java-thread-pool/" title="Java线程池解析"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-21</div><div class="title">Java线程池解析</div></div></a></div><div><a href="/2021/10/06/java-stream/" title="java流处理"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-06</div><div class="title">java流处理</div></div></a></div><div><a href="/2021/06/09/java1/" title="java初学部分笔记(从语言基础到数组)"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-09</div><div class="title">java初学部分笔记(从语言基础到数组)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">一只柑</div><div class="author-info__description">心中有海 不赶浪潮</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">63</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">创建线程的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">线程的几个主要方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-number">3.</span> <span class="toc-text">线程同步</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/12/29/kmp-next-list/" title="KMP算法之next数组代码理解"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="KMP算法之next数组代码理解"/></a><div class="content"><a class="title" href="/2021/12/29/kmp-next-list/" title="KMP算法之next数组代码理解">KMP算法之next数组代码理解</a><time datetime="2021-12-29T14:49:53.000Z" title="发表于 2021-12-29 22:49:53">2021-12-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/26/java-thread/" title="java基础知识补充"><img src="http://cdn.rice-and-bran.site/java_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java基础知识补充"/></a><div class="content"><a class="title" href="/2021/12/26/java-thread/" title="java基础知识补充">java基础知识补充</a><time datetime="2021-12-26T15:26:12.000Z" title="发表于 2021-12-26 23:26:12">2021-12-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/21/java-thread-pool/" title="Java线程池解析"><img src="http://cdn.rice-and-bran.site/java_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java线程池解析"/></a><div class="content"><a class="title" href="/2021/12/21/java-thread-pool/" title="Java线程池解析">Java线程池解析</a><time datetime="2021-12-21T14:08:54.000Z" title="发表于 2021-12-21 22:08:54">2021-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/13/java-power2/" title="Java判定2的方幂和2方幂取法"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java判定2的方幂和2方幂取法"/></a><div class="content"><a class="title" href="/2021/12/13/java-power2/" title="Java判定2的方幂和2方幂取法">Java判定2的方幂和2方幂取法</a><time datetime="2021-12-13T14:02:18.000Z" title="发表于 2021-12-13 22:02:18">2021-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/12/java-zip-function/" title="Java实现pythonzip方法"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java实现pythonzip方法"/></a><div class="content"><a class="title" href="/2021/12/12/java-zip-function/" title="Java实现pythonzip方法">Java实现pythonzip方法</a><time datetime="2021-12-12T15:36:27.000Z" title="发表于 2021-12-12 23:36:27">2021-12-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 一只柑</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">赣ICP备20002874号</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div></div></body></html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>分布式基本工具学习 | 一只柑の博客</title><meta name="keywords" content="Java,分布式,Spring,Docker,Nginx"><meta name="author" content="一只柑"><meta name="copyright" content="一只柑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DockerDocker 是一个用来装程序及其环境的容器，属于Linux容器的一种封装，提供简单易用的容器使用接口。是目前最流行的linux容器解决方案。 为什么需要docker 环境配置的难题 虚拟机资源占用多 冗余多 Docker的基础——Linux容器  用途 提供统一的环境 提供快速拓展、弹性伸缩的云服务 防止其他用户的进程把服务器资源占用过多，隔离  特点 标准化 运输方式（把程序和环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式基本工具学习">
+<meta property="og:url" content="http://123.57.158.5/2022/02/27/distribute/index.html">
+<meta property="og:site_name" content="一只柑の博客">
+<meta property="og:description" content="DockerDocker 是一个用来装程序及其环境的容器，属于Linux容器的一种封装，提供简单易用的容器使用接口。是目前最流行的linux容器解决方案。 为什么需要docker 环境配置的难题 虚拟机资源占用多 冗余多 Docker的基础——Linux容器  用途 提供统一的环境 提供快速拓展、弹性伸缩的云服务 防止其他用户的进程把服务器资源占用过多，隔离  特点 标准化 运输方式（把程序和环">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://123.57.158.5/img/psb.jpg">
+<meta property="article:published_time" content="2022-02-26T16:25:03.000Z">
+<meta property="article:modified_time" content="2022-04-24T17:22:50.116Z">
+<meta property="article:author" content="一只柑">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://123.57.158.5/img/psb.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://123.57.158.5/2022/02/27/distribute/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '分布式基本工具学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-25 01:22:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="一只柑の博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">67</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/psb.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">一只柑の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">分布式基本工具学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-26T16:25:03.000Z" title="发表于 2022-02-27 00:25:03">2022-02-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-24T17:22:50.116Z" title="更新于 2022-04-25 01:22:50">2022-04-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="/2022/02/27/distribute/image-20220227003608410.png" alt="image-20220227003608410"></p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p><strong>Docker</strong> 是一个用来装程序及其环境的容器，属于Linux容器的一种封装，提供简单易用的容器使用接口。是目前最流行的linux容器解决方案。</p>
+<h3 id="为什么需要docker"><a href="#为什么需要docker" class="headerlink" title="为什么需要docker"></a>为什么需要docker</h3><ul>
+<li>环境配置的难题</li>
+<li>虚拟机资源占用多 冗余多</li>
+<li>Docker的基础——Linux容器</li>
+</ul>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><ul>
+<li>提供统一的环境</li>
+<li>提供快速拓展、弹性伸缩的云服务</li>
+<li>防止其他用户的进程把服务器资源占用过多，隔离</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li><p>标准化</p>
+<p>运输方式（把程序和环境从一个机器运到另一个机器）</p>
+<p>存储方式（程序和环境的存储）</p>
+<p>API接口（不需要Tomcat等应用的命令，都标准化了）</p>
+</li>
+<li><p>灵活：即使是最复杂的应用也可以集装箱化</p>
+</li>
+<li><p>轻量级：容器利用并共享主机内核</p>
+</li>
+<li><p>便携式：可以在本地构建，部署到云，并在任何地方运行</p>
+</li>
+</ul>
+<h3 id="Docker组成、架构等"><a href="#Docker组成、架构等" class="headerlink" title="Docker组成、架构等"></a>Docker组成、架构等</h3><img src="/2022/02/27/distribute/image-20220303003957879.png" alt="image-20220303003957879" style="zoom:50%;">
+
+<p><strong>image镜像</strong></p>
+<p>存储：联合文件，UnionFS</p>
+<p>把不同的目录放到同一个虚拟的文件系统下</p>
+<img src="/2022/02/27/distribute/image-20220303004247535.png" alt="image-20220303004247535" style="zoom:50%;">
+
+<img src="/2022/02/27/distribute/image-20220303004419133.png" alt="image-20220303004419133" style="zoom:50%;">
+
+<p>将环境/软件进行分层。往往是在别的层之上开发image</p>
+<p><strong>容器</strong></p>
+<p>镜像类似于Java中的类，容器类似于实例；容器层可以被修改，而镜像不可以被修改；一个镜像可以生成多个容器，容器之间没有任何的干扰。</p>
+<p><a href="hub.docker.com">官方仓库</a></p>
+<p><strong>client</strong> 提供给用户一个终端，用户输入Docker提供的命令来管理本地或远程的服务器</p>
+<p><strong>deamon</strong> 服务端守护进程，接收Client发送的命令并执行相应的操作</p>
+<img src="/2022/02/27/distribute/image-20220303005526922.png" alt="image-20220303005526922" style="zoom:50%;">
+
+<h3 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 下载镜像</span><br><span class="line">docker pull [options] name[:tag]</span><br><span class="line"># 显示本机镜像</span><br><span class="line">docker images [options] [repository[:tag]]</span><br><span class="line"># 运行镜像</span><br><span class="line">docker run [options] image [command] [args]</span><br><span class="line"># 查看容器</span><br><span class="line">docker ps</span><br><span class="line"># 访问容器内部</span><br><span class="line">docker exec [options] container command [args]</span><br><span class="line"># 关闭容器</span><br><span class="line">docker stop [options] container_id</span><br><span class="line">docker kill container_id</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>举例：docker exec -it 444 bash</p>
+<p>把容器（id444开头）内部终端映射到当前终端，对容器内部进行访问</p>
+<h3 id="Docker的网络模式"><a href="#Docker的网络模式" class="headerlink" title="Docker的网络模式"></a>Docker的网络模式</h3><ul>
+<li><p>Bridge</p>
+<p>最常用。获得独立的网络 通过bridge与外部进行映射</p>
+<p><code>docker run -d -p 8080:80 docker/getting-started</code>将本机8080端口映射到容器的80端口，-d后台运行</p>
+<p><code>-P</code> 可以将容器内部的所有端口全部进行随机映射 到本机</p>
+</li>
+<li><p>Host</p>
+<p>不需要获得独立的网络 端口</p>
+</li>
+<li><p>None</p>
+<p>无网络</p>
+</li>
+</ul>
+<h3 id="DockerFile实践"><a href="#DockerFile实践" class="headerlink" title="DockerFile实践"></a>DockerFile实践</h3><p>通过dockerfile来管理环境，写自己的dockerfile。</p>
+<p>dockerfile（名称一致）文件的基本内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 获取基础镜像</span><br><span class="line">FROM alpine:latest</span><br><span class="line"># 维护者</span><br><span class="line">MAINTAINER scheelite</span><br><span class="line"># 自己dockerfile具体内容</span><br><span class="line">CMD echo &quot;hello my dockerfile&quot;</span><br></pre></td></tr></table></figure>
+
+<p>制作image（当前路径）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t hello_docker .</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><ul>
+<li><p>Http反向代理</p>
+<p>首先正向代理是什么？客户端 -&gt; 代理服务器 -&gt; 互联网。例如需要代理访问外网（被墙），保护隐私和具有安全性的访问</p>
+<p><img src="/2022/02/27/distribute/305504-20161112124853014-1532060796.png" alt="img"></p>
+<p>方向代理是对于服务端而言，作用可以是提供负载均衡，将压力进行分配；提供资源缓存等</p>
+<p><img src="/2022/02/27/distribute/image-20220309003553007.png" alt="image-20220309003553007"></p>
+<p>nginx就是起到反向代理的作用</p>
+</li>
+<li><p>动静态资源分离</p>
+<p>需要动静态资源分离时候，静态资源无需tomcat，Tomcat只负责处理动态请求，nginx可以直接获取到当前请求的文件并返回</p>
+<p>另外，nginx可以直接作为静态资源服务器</p>
+</li>
+</ul>
+<p>优点是 1. 高并发、高性能 2. 可扩展性好 3. 可靠性高 4. 热部署 5. 开源、可商用</p>
+<h3 id="命令与配置文件"><a href="#命令与配置文件" class="headerlink" title="命令与配置文件"></a>命令与配置文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nginx -c 修改配置文件</span><br><span class="line">nginx -s stop 立即停止</span><br><span class="line">nginx -s quit 优雅停止</span><br><span class="line">nginx -s reload 重启</span><br><span class="line">nginx -t 测试配置文件/显示当前配置文件</span><br></pre></td></tr></table></figure>
+
+<p>配置文件语法：</p>
+<p>打括号包含很多指令</p>
+<p>include 引入，# 注释，$变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">cat nginx.conf</span><br><span class="line"></span><br><span class="line"># 运行用户，默认是nginx</span><br><span class="line">user  nginx;</span><br><span class="line"># nginx进程数,一般设置为和cpu核数一样</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"># 全局错误日志路径</span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line"># 进程pid路径</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line"># 最大连接数</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 设置http服务器</span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"># 设置日志的格式</span><br><span class="line">    log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                      &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                      &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"># 访问日志的路径</span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line"># 开启高效传输模式</span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"># 长连接超时时间，单位是秒</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">#传输时是否压缩，压缩的话需要解压，但是传的大小就小了</span><br><span class="line">    #gzip  on;</span><br><span class="line">#加载其他的配置文件，一带多</span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认配置 default.cofig内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">		# 端口 服务名</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">		# 访问路径</span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 错误转发路径</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p>核心思想：接受并转发消息。可以把它想象成邮局。</p>
+<p>关键名词 producer queue consumer </p>
+<p><strong>消息队列</strong>：消息队列已经逐渐成为企业IT系统内部通信的核心手段，具有低耦合、可靠投递、广播、流量控制、最终一致性等一系列功能</p>
+<p><strong>特性</strong>： 业务无关；FIFO；容灾；性能 </p>
+<p><strong>为什么要使用消息队列</strong>：1.系统模块之间解耦；2.异步调用（比如下单完成后加入队列，后面一系列平行的操作如扣款、通知用户，卖家等就直接进行分发）；3.流量削峰（将请求存入队列，以可接受速度进行分发）</p>
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><p><strong>RabbitMQ特点</strong>：开源、跨语言；Erlang语言编写；应用广泛；社区活跃；API丰富</p>
+<p><strong>AMPQ协议</strong>：Advanced Message Queuing Protocol</p>
+<p><img src="/2022/02/27/distribute/image-20220313204729731.png" alt="image-20220313204729731"></p>
+<p>Virtual Host对应很多独立的使用队列的用户，生产者只需要投递，消费者只需要监听消息队列，完成解耦。Exchange和Message Queue通过路由键进行绑定</p>
+<p><strong>RabbitMQ架构</strong>：</p>
+<p><img src="/2022/02/27/distribute/image-20220313205135545.png" alt="image-20220313205135545"></p>
+<ul>
+<li>Server/Broker服务，conneciton与Server建立连接</li>
+<li>channel信道，几乎所有的操作都在信道上进行，客户端可以建立多个信道，message消息由properties和body组成。</li>
+<li>Virtual host虚拟主机，顶层隔离。同一个虚拟主机下，不能有重复的交换机和queue</li>
+<li>Exchange 交换机，接收生产者的消息，然后根据指定的Routing Key路由器去把消息转发到所绑定的队列上。bingding 绑定交换机和队列</li>
+<li>routing key路由键，路由规则，虚拟机可以用它来确定这个消息如何进行一个流转</li>
+<li>queue 队列，消费者只需要监听队列来消费消息，不需要关注消息来自于哪个Exchange</li>
+<li>Exchange和Message Queue存在着绑定关系，一个Exchange可以绑定多个消息队列</li>
+</ul>
+<h3 id="消息流转过程"><a href="#消息流转过程" class="headerlink" title="消息流转过程"></a>消息流转过程</h3><p>生产者发送消息时候会指定routing key，用来确定去哪个MQ</p>
+<p><img src="/2022/02/27/distribute/image-20220313210124464.png" alt="image-20220313210124464"></p>
+<h4 id="官方安装教程地址"><a href="#官方安装教程地址" class="headerlink" title="官方安装教程地址"></a>官方安装教程地址</h4><p><a target="_blank" rel="noopener" href="https://www.rabbitmq.com/install-rpm.html#package-dependencies">https://www.rabbitmq.com/install-rpm.html#package-dependencies</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 启动rabbitmq</span><br><span class="line">systemctl start rabbitmq-server</span><br><span class="line"># 查看状态</span><br><span class="line">rabbitmqctl status</span><br><span class="line"># 查看服务状态</span><br><span class="line">systemctl status rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>Mac下配置环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># vim ~/.bash_profile</span><br><span class="line">export PATH=$PATH:/usr/local/opt/rabbitmq/sbin</span><br><span class="line"># source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="RabbitMQ管理后台"><a href="#RabbitMQ管理后台" class="headerlink" title="RabbitMQ管理后台"></a>RabbitMQ管理后台</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 启动管理后台</span><br><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"># 设置用户名密码</span><br><span class="line">rabbitmqctl add_user admin password</span><br><span class="line"># 设置为管理员</span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br></pre></td></tr></table></figure>
+
+<p>就可以通过15672端口登陆rabbitmq的后台</p>
+<h3 id="HelloWorld案例"><a href="#HelloWorld案例" class="headerlink" title="HelloWorld案例"></a>HelloWorld案例</h3><p>maven-rabbitmq客户端项目：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.rabbitmq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>amqp-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.14.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>平均分配</strong>：按照数量平均。直接按照顺序给消费者发放，可以不需要确认。</p>
+<p>发送消息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">channel.queueDeclare(ConnectionFactoryUtil.QUEUE, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="comment">// 空字符串代表使用默认的交换机</span></span><br><span class="line">channel.basicPublish(<span class="string">&quot;&quot;</span>,ConnectionFactoryUtil.QUEUE,<span class="keyword">null</span>, bytes);</span><br></pre></td></tr></table></figure>
+
+<p>接受消息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// recive messgae todo</span></span><br><span class="line">channel.basicConsume(QUEUE_NAME,<span class="keyword">true</span>,<span class="keyword">new</span> DefaultConsumer(channel)&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleDelivery</span><span class="params">(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, <span class="keyword">byte</span>[] body)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//dosomething</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>按照压力分配任务</strong>：需要手动确认消息过程，使得消费者任务完成后能够自动得到新的任务进行分配。</p>
+<p>处理任务内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">channel.queueDeclare(ConnectionFactoryUtil.QUEUE,<span class="keyword">false</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line"><span class="comment">// expect max task, do this work one by one</span></span><br><span class="line">channel.basicQos(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// deal with the message and ack by ourselves</span></span><br><span class="line">channel.basicConsume(ConnectionFactoryUtil.QUEUE,<span class="keyword">false</span>, <span class="keyword">new</span> DefaultConsumer(channel)&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleDelivery</span><span class="params">(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, <span class="keyword">byte</span>[] body)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// dosomething code</span></span><br><span class="line">    <span class="comment">// ack the message</span></span><br><span class="line">    channel.basicAck(envelope.getDeliveryTag(),<span class="keyword">false</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="交换机工作模式"><a href="#交换机工作模式" class="headerlink" title="交换机工作模式"></a>交换机工作模式</h3><p><strong>fanout</strong>：广播这种交换模式只需要将队列绑定到交换机上即可，是不需要设置路由键的。如果接受到消息的Exchange当时没有与任何Queue绑定，则消息会被抛弃。</p>
+<p><img src="/2022/02/27/distribute/image-20220418010208861.png" alt="image-20220418010208861"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);</span><br><span class="line">// fanout mode do not need to set rotingKey</span><br><span class="line">channel.basicPublish(exchangeName, &quot;&quot;, null, message.getBytes(StandardCharsets.UTF_8));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);</span><br><span class="line"><span class="comment">// get a unsustainable queue randomly tempatation</span></span><br><span class="line">String queueName = channel.queueDeclare().getQueue();</span><br><span class="line"><span class="comment">// bind queue with exchange, while routingKey can be empty in this fanout mode;</span></span><br><span class="line">channel.queueBind(queueName, exchangeName, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="comment">// create the consumer and show the message</span></span><br><span class="line">DefaultConsumer defaultConsumer = <span class="keyword">new</span> DefaultConsumer(channel) &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleDelivery</span><span class="params">(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, <span class="keyword">byte</span>[] body)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;message recieved successfully&quot;</span>);</span><br><span class="line">    String s = <span class="keyword">new</span> String(body, Charset.defaultCharset());</span><br><span class="line">    System.out.println(s);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">channel.basicConsume(queueName, <span class="keyword">true</span>, defaultConsumer);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>direct</strong>：根据RoutingKey匹配消息路由到指定的队列</p>
+<p><img src="/2022/02/27/distribute/image-20220418010410608.png" alt="image-20220418010410608"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT);</span><br><span class="line">channel.basicPublish(exchangeName, routingKeyName,<span class="keyword">null</span>,message.getBytes(StandardCharsets.UTF_8));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">channel.exchangeDeclare(String exchangeName, BuiltinExchangeType.DIRECT);</span><br><span class="line"><span class="comment">// get a random temp queue</span></span><br><span class="line">String queue = channel.queueDeclare().getQueue();</span><br><span class="line"><span class="comment">// bind routingkey</span></span><br><span class="line">channel.queueBind(queue, exchangeName, routingKeyName);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>topic</strong>：生产者指定RoutingKey消息根据消费端指定的队列通过模糊匹配的方式进行相应的转发</p>
+<p><img src="/2022/02/27/distribute/image-20220419233710059.png" alt="image-20220419233710059"></p>
+<p><code>*</code>可以代替一个单词，<code>#</code>可以代替0个或多个单词</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.exchangeDeclare(consts.EXCHANGE, BuiltinExchangeType.TOPIC);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// match all the error messages</span></span><br><span class="line">channel.queueBind(queueName, consts.EXCHANGE, <span class="string">&quot;*.*.error&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>headers: 根据发送消息内容的headers属性来匹配</p>
+<p>略</p>
+<h3 id="Spring-RabbitMQ"><a href="#Spring-RabbitMQ" class="headerlink" title="Spring RabbitMQ"></a>Spring RabbitMQ</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以topic交换机模式为例：</p>
+<p>首先对消费者进行配置，并将队列以相应的routing key绑定在一个交换机上</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">server.port</span>=<span class="string">8080</span></span><br><span class="line"><span class="meta">spring.application.name</span>=<span class="string">producer</span></span><br><span class="line"></span><br><span class="line"><span class="meta">spring.rabbitmq.addresses</span>=<span class="string">x.x.x.x:5672</span></span><br><span class="line"><span class="meta">spring.rabbitmq.username</span>=<span class="string">admin</span></span><br><span class="line"><span class="meta">spring.rabbitmq.password</span>=<span class="string">Gan336000</span></span><br><span class="line"><span class="meta">spring.rabbitmq.virtual-host</span>=<span class="string">/</span></span><br><span class="line"><span class="meta">spring.rabbitmq.connection-timeout</span>=<span class="string">15000</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicRabbitConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">queue1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(<span class="string">&quot;queue1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">queue2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(<span class="string">&quot;queue2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">TopicExchange <span class="title">exchange</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TopicExchange(<span class="string">&quot;bootExchange&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Binding <span class="title">bindingExchangeMessage1</span><span class="params">(Queue queue1, TopicExchange exchange)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue1).to(exchange).with(<span class="string">&quot;dog.red&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Binding <span class="title">bindingExchangeMessage2</span><span class="params">(Queue queue2, TopicExchange exchange)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue2).to(exchange).with(<span class="string">&quot;dog.#&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发送消息就通过AmqpTemplate的convertAndSend方法进行发送</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">amqpTemplate.convertAndSend(exchangeName, RoutingKeyName, message);</span><br></pre></td></tr></table></figure>
+
+<p>而消息的接收方则通过RabbitListener进行绑定监听</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;queue1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reciver1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitHandler</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;reciver1: &quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">一只柑</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://123.57.158.5/2022/02/27/distribute/">http://123.57.158.5/2022/02/27/distribute/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://123.57.158.5" target="_blank">一只柑の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><a class="post-meta__tags" href="/tags/Spring/">Spring</a><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/Nginx/">Nginx</a></div><div class="post_share"><div class="social-share" data-image="/img/psb.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/15/gateway-connection-closed-srror/"><img class="prev-cover" src="/img/psb.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">gateway连接超时错误</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/23/java-threadLocal/"><img class="next-cover" src="/img/psb.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ThreadLocal详解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/08/30/aop-round-advice/" title="AOP环绕通知"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-30</div><div class="title">AOP环绕通知</div></div></a></div><div><a href="/2021/10/10/java-lang/" title="由@Valid注解校验引发的问题之Integer与int的比较"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-10</div><div class="title">由@Valid注解校验引发的问题之Integer与int的比较</div></div></a></div><div><a href="/2022/05/15/micro-server/" title="分布式微服务"><img class="cover" src="/img/psb.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-15</div><div class="title">分布式微服务</div></div></a></div><div><a href="/2021/08/27/spring-ioc/" title="使用反射简单模拟spring的ioc容器"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-27</div><div class="title">使用反射简单模拟spring的ioc容器</div></div></a></div><div><a href="/2021/08/15/ssm/" title="ssm部分笔记"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-15</div><div class="title">ssm部分笔记</div></div></a></div><div><a href="/2021/09/14/springProject/" title="Spring MongoTemplate踩坑"><img class="cover" src="http://cdn.rice-and-bran.site/java_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-14</div><div class="title">Spring MongoTemplate踩坑</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">一只柑</div><div class="author-info__description">心中有海 不赶浪潮</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">67</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:jwei.gan@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81docker"><span class="toc-number">1.1.</span> <span class="toc-text">为什么需要docker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-number">1.1.1.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.2.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E7%BB%84%E6%88%90%E3%80%81%E6%9E%B6%E6%9E%84%E7%AD%89"><span class="toc-number">1.2.</span> <span class="toc-text">Docker组成、架构等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">Docker命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">Docker的网络模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DockerFile%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.5.</span> <span class="toc-text">DockerFile实践</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-number">2.</span> <span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E4%B8%8E%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">命令与配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMQ"><span class="toc-number">3.</span> <span class="toc-text">RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E6%B5%81%E8%BD%AC%E8%BF%87%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">消息流转过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E5%9C%B0%E5%9D%80"><span class="toc-number">3.2.1.</span> <span class="toc-text">官方安装教程地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RabbitMQ%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0"><span class="toc-number">3.3.</span> <span class="toc-text">RabbitMQ管理后台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HelloWorld%E6%A1%88%E4%BE%8B"><span class="toc-number">3.4.</span> <span class="toc-text">HelloWorld案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.5.</span> <span class="toc-text">交换机工作模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-RabbitMQ"><span class="toc-number">3.6.</span> <span class="toc-text">Spring RabbitMQ</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/micro-server/" title="分布式微服务"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式微服务"/></a><div class="content"><a class="title" href="/2022/05/15/micro-server/" title="分布式微服务">分布式微服务</a><time datetime="2022-05-15T13:09:01.000Z" title="发表于 2022-05-15 21:09:01">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/gateway-connection-closed-srror/" title="gateway连接超时错误"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gateway连接超时错误"/></a><div class="content"><a class="title" href="/2022/05/15/gateway-connection-closed-srror/" title="gateway连接超时错误">gateway连接超时错误</a><time datetime="2022-05-15T07:30:21.000Z" title="发表于 2022-05-15 15:30:21">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/27/distribute/" title="分布式基本工具学习"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式基本工具学习"/></a><div class="content"><a class="title" href="/2022/02/27/distribute/" title="分布式基本工具学习">分布式基本工具学习</a><time datetime="2022-02-26T16:25:03.000Z" title="发表于 2022-02-27 00:25:03">2022-02-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/23/java-threadLocal/" title="ThreadLocal详解"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ThreadLocal详解"/></a><div class="content"><a class="title" href="/2022/02/23/java-threadLocal/" title="ThreadLocal详解">ThreadLocal详解</a><time datetime="2022-02-23T15:40:03.000Z" title="发表于 2022-02-23 23:40:03">2022-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/06/java-io/" title="JavaIO操作笔记"><img src="/img/psb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaIO操作笔记"/></a><div class="content"><a class="title" href="/2022/02/06/java-io/" title="JavaIO操作笔记">JavaIO操作笔记</a><time datetime="2022-02-06T05:58:15.000Z" title="发表于 2022-02-06 13:58:15">2022-02-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 一只柑</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">赣ICP备20002874号</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div></div></body></html>

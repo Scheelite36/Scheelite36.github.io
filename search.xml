@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>develop test</title>
+      <link href="/2023/04/18/develop-test/"/>
+      <url>/2023/04/18/develop-test/</url>
+      
+        <content type="html"><![CDATA[<ol><li>定义对象阶段<ul><li>定义测试对象</li><li>模拟依赖对象（类成员）</li><li>注入依赖对象（类成员）</li></ul></li><li>模拟方法阶段<ul><li>模拟依赖对象（参数或返回值）</li><li>模拟依赖方法</li></ul></li><li>调用方法阶段<ul><li>模拟依赖对象（参数）</li><li>调用测试方法</li><li>验证数据对象（返回值）</li></ul></li><li>验证方法阶段<ul><li>验证依赖方法</li><li>验证数据对象（参数）</li><li>验证依赖对象</li></ul></li></ol><img src="/2023/04/18/develop-test/image-20230419002221860.png" alt="image-20230419002221860"><img src="/2023/04/18/develop-test/image-20230419002313600.png" alt="image-20230419002313600"><p>Spy可以使用真实方法，Mock全部都是模拟方法</p><img src="/2023/04/18/develop-test/image-20230419002422879.png" alt="image-20230419002422879"><img src="/2023/04/18/develop-test/image-20230419002644866.png" alt="image-20230419002644866"><img src="/2023/04/18/develop-test/image-20230419002926688.png" alt="image-20230419002926688"><img src="/2023/04/18/develop-test/image-20230419002857184.png" alt="image-20230419002857184"><p>（PowerMockito的静态方法可以用Mockito代替</p><img src="/2023/04/18/develop-test/image-20230419003127936.png" alt="image-20230419003127936"><img src="/2023/04/18/develop-test/image-20230419003355142.png" alt="image-20230419003355142"><img src="/2023/04/18/develop-test/image-20230419003511114.png" alt="image-20230419003511114"><p><img src="/2023/04/18/develop-test/image-20230419003545329.png" alt="image-20230419003545329"></p><img src="/2023/04/18/develop-test/image-20230419003637057.png" alt="image-20230419003637057"><img src="/2023/04/18/develop-test/image-20230419003727453.png" alt="image-20230419003727453"><p><img src="/2023/04/18/develop-test/image-20230419003916460.png" alt="image-20230419003916460"></p><p><img src="/2023/04/18/develop-test/image-20230419004007948.png" alt="image-20230419004007948"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Mockito </tag>
+            
+            <tag> JUnit </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Mybatis二级缓存与临时表</title>
       <link href="/2023/04/08/mybatis-temp-table-problem/"/>
       <url>/2023/04/08/mybatis-temp-table-problem/</url>
@@ -95,9 +118,9 @@
             
             <tag> Java </tag>
             
-            <tag> 分布式 </tag>
-            
             <tag> Spring </tag>
+            
+            <tag> 分布式 </tag>
             
             <tag> Docker </tag>
             
@@ -1832,11 +1855,11 @@
       
         <tags>
             
+            <tag> 实战 </tag>
+            
             <tag> HTML </tag>
             
             <tag> CSS </tag>
-            
-            <tag> 实战 </tag>
             
         </tags>
       
@@ -1886,11 +1909,11 @@
       
         <tags>
             
+            <tag> 实战 </tag>
+            
             <tag> HTML </tag>
             
             <tag> CSS </tag>
-            
-            <tag> 实战 </tag>
             
             <tag> JavaScript </tag>
             
